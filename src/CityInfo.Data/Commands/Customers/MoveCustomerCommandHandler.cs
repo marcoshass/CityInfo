@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 namespace CityInfo.Data.Commands.Customers
 {
     public class MoveCustomerCommand
-    { }
+    {
+        public int Id { get; set; }
+    }
 
     public class MoveCustomerCommandHandler : ICommandHandler<MoveCustomerCommand>
     {
@@ -22,7 +24,12 @@ namespace CityInfo.Data.Commands.Customers
 
         public void Handle(MoveCustomerCommand command)
         {
-            throw new NotImplementedException();
+            var record = _context.TblCustomers.Find(command.Id);
+            if (record != null)
+            {
+                record.FirstName = "Marcos";
+                _context.SaveChanges();
+            }
         }
     }
 }
