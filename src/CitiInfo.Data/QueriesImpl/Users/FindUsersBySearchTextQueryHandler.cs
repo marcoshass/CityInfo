@@ -1,6 +1,6 @@
 ﻿using CitiInfo.Data.Entities;
 using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries;
+using CityInfo.Domain.Queries.Infrastructure;
 using CityInfo.Domain.Queries.Users;
 using System;
 using System.Collections.Generic;

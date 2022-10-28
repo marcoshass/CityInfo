@@ -2,7 +2,7 @@ using CitiInfo.Data.Entities;
 using CitiInfo.Data.QueriesImpl.Movies;
 using CitiInfo.Data.QueriesImpl.Users;
 using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries;
+using CityInfo.Domain.Queries.Infrastructure;
 using CityInfo.Domain.Queries.Movies;
 using CityInfo.Domain.Queries.Users;
 using Microsoft.EntityFrameworkCore;

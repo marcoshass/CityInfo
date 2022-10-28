@@ -1,5 +1,5 @@
 ﻿using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries;
+using CityInfo.Domain.Queries.Infrastructure;
 using CityInfo.Domain.Queries.Movies;
 using Microsoft.AspNetCore.Mvc;
 
