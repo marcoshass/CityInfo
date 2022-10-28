@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Domain.Cqrs.Paging
 {
-    public sealed class PagedResult<T>
+    public sealed class PagingResult<T>
     {
         public readonly PagingInformation Paging;
         public readonly int PageCount;
         public readonly int ItemCount;
         public readonly ReadOnlyCollection<T> Page;
 
-        public PagedResult(
+        public PagingResult(
             PagingInformation paging, int pageCount, int itemCount, ReadOnlyCollection<T> page)
         {
             this.Paging = paging;
@@ -23,11 +23,11 @@ namespace CityInfo.Domain.Cqrs.Paging
             this.Page = page;
         }
 
-        public static PagedResult<T> ApplyPaging(IQueryable<T> query, PagingInformation paging)
+        public static PagingResult<T> ApplyPaging(IQueryable<T> query, PagingInformation paging)
         {
             int count = query.Count();
             var page = query.Skip(paging.PageSize * paging.PageIndex).Take(paging.PageSize).ToList();
-            return new PagedResult<T>(
+            return new PagingResult<T>(
                 paging: paging,
                 pageCount: (count + (paging.PageSize - 1)) / paging.PageSize,
                 itemCount: count,

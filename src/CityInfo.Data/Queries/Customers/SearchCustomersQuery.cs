@@ -7,16 +7,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Dynamic.Core;
 
 namespace CityInfo.Data.Queries.Customers
 {
-    public class SearchCustomersQuery : IQuery<PagedResult<Customer>>
+    public class SearchCustomersQuery : IQuery<PagingResult<Customer>>
     {
         public string SearchText { get; set; }
+        public string Ordering { get; set; }
         public PagingInformation Paging { get; set; }
     }
 
-    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagedResult<Customer>>
+    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<Customer>>
     {
         private readonly CustomersDBContext _context;
 
@@ -25,7 +27,7 @@ namespace CityInfo.Data.Queries.Customers
             _context = context;
         }
 
-        public PagedResult<Customer> Handle(SearchCustomersQuery query)
+        public PagingResult<Customer> Handle(SearchCustomersQuery query)
         {
             var results =
                 from c in _context.TblCustomers
@@ -36,7 +38,13 @@ namespace CityInfo.Data.Queries.Customers
                     LastName = c.LastName,
                     DateOfBirth = c.DateOfBirth
                 };
-            return PagedResult<Customer>.ApplyPaging(results, query.Paging);
+
+            if (!string.IsNullOrEmpty(query.Ordering))
+            {
+                results = results.OrderBy(query.Ordering);
+            }
+
+            return PagingResult<Customer>.ApplyPaging(results, query.Paging);
         }
     }
 }

@@ -1,10 +1,7 @@
-﻿using CityInfo.Data.Commands.Customers;
-using CityInfo.Data.Queries.Customers;
-using CityInfo.Domain.Cqrs.Command;
+﻿using CityInfo.Data.Queries.Customers;
 using CityInfo.Domain.Cqrs.Paging;
 using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1
@@ -13,9 +10,9 @@ namespace CityInfo.WebApi.Controllers.v1
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private IQueryHandler<SearchCustomersQuery, PagedResult<Customer>> _handler;
+        private IQueryHandler<SearchCustomersQuery, PagingResult<Customer>> _handler;
 
-        public CustomersController(IQueryHandler<SearchCustomersQuery, PagedResult<Customer>> handler)
+        public CustomersController(IQueryHandler<SearchCustomersQuery, PagingResult<Customer>> handler)
         {
             _handler = handler;
         }
@@ -25,7 +22,8 @@ namespace CityInfo.WebApi.Controllers.v1
         {
             var query = new SearchCustomersQuery
             {
-                Paging = new PagingInformation(1, 10)
+                Paging = new PagingInformation(0, 10),
+                Ordering = "Id DESC"
             };
 
             var result = _handler.Handle(query);
