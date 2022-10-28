@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CitiInfo.Data.Entities
+namespace CityInfo.Data.Entities
 {
     public partial class MoviesDBContext : DbContext
     {

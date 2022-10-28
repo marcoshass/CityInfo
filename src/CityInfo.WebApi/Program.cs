@@ -1,6 +1,6 @@
-using CitiInfo.Data.Entities;
-using CitiInfo.Data.QueriesImpl.Movies;
-using CitiInfo.Data.QueriesImpl.Users;
+using CityInfo.Data.Entities;
+using CityInfo.Data.QueriesImpl.Movies;
+using CityInfo.Data.QueriesImpl.Users;
 using CityInfo.Domain.Entities;
 using CityInfo.Domain.Queries.Infrastructure;
 using CityInfo.Domain.Queries.Movies;

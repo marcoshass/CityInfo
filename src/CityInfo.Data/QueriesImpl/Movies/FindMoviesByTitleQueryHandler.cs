@@ -1,4 +1,4 @@
-﻿using CitiInfo.Data.Entities;
+﻿using CityInfo.Data.Entities;
 using CityInfo.Domain.Entities;
 using CityInfo.Domain.Queries.Infrastructure;
 using CityInfo.Domain.Queries.Movies;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CitiInfo.Data.QueriesImpl.Movies
+namespace CityInfo.Data.QueriesImpl.Movies
 {
     public class FindMoviesByTitleQueryHandler :
         IQueryHandlerAsync<FindMoviesByTitleQuery, ICollection<Movie>>
