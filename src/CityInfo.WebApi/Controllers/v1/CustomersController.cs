@@ -1,5 +1,9 @@
 ﻿using CityInfo.Data.Commands.Customers;
+using CityInfo.Data.Queries.Customers;
 using CityInfo.Domain.Cqrs.Command;
+using CityInfo.Domain.Cqrs.Paging;
+using CityInfo.Domain.Cqrs.Query;
+using CityInfo.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,24 +13,24 @@ namespace CityInfo.WebApi.Controllers.v1
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private ICommandHandler<MoveCustomerCommand> _handler;
+        private IQueryHandler<SearchCustomersQuery, PagedResult<Customer>> _handler;
 
-        public CustomersController(ICommandHandler<MoveCustomerCommand> handler)
+        public CustomersController(IQueryHandler<SearchCustomersQuery, PagedResult<Customer>> handler)
         {
             _handler = handler;
         }
 
-        [HttpPost]
-        public ActionResult Post()
+        [HttpGet]
+        public ActionResult Get()
         {
-            var command = new MoveCustomerCommand
+            var query = new SearchCustomersQuery
             {
-                Id = 1
+                Paging = new PagingInformation(1, 10)
             };
 
-            _handler.Handle(command);
+            var result = _handler.Handle(query);
 
-            return Ok();
+            return Ok(result.Page);
         }
     }
 }
