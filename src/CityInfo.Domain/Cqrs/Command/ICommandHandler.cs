@@ -10,4 +10,9 @@ namespace CityInfo.Domain.Cqrs.Command
     {
         void Handle(TCommand command);
     }
+
+    public interface ICommandHandlerAsync<TCommand>
+    {
+        Task Handle(TCommand command);
+    }
 }
