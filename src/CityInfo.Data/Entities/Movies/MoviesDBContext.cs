@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CityInfo.Data.Entities
+namespace CityInfo.Data.Entities.Movies
 {
     public partial class MoviesDBContext : DbContext
     {
         public MoviesDBContext()
-        {}
+        { }
 
-        public MoviesDBContext(DbContextOptions options)
+        public MoviesDBContext(DbContextOptions<MoviesDBContext> options)
             : base(options)
-        {}
+        { }
 
         internal virtual DbSet<TblMovie> TblMovies { get; set; } = null!;
 

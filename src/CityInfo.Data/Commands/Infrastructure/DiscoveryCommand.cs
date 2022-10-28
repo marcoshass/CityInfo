@@ -1,21 +1,21 @@
-﻿using CityInfo.Domain.Cqrs.Query;
+﻿using CityInfo.Domain.Cqrs.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Data.Queries.Infrastructure
+namespace CityInfo.Data.Commands.Infrastructure
 {
     // Implementation used only by dependency injection
     // for discovery.
 
-    public class DiscoveryQuery : IQuery<object>
+    public class DiscoveryCommand
     { }
 
-    public class DiscoveryQueryHandler : IQueryHandler<DiscoveryQuery, object>
+    public class DiscoveryCommandHandler : ICommandHandler<DiscoveryCommand>
     {
-        public object Handle(DiscoveryQuery query)
+        public void Handle(DiscoveryCommand command)
         {
             throw new NotImplementedException();
         }

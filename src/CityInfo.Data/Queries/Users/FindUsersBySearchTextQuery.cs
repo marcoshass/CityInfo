@@ -1,4 +1,4 @@
-﻿using CityInfo.Data.Entities;
+﻿using CityInfo.Data.Entities.Movies;
 using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
 

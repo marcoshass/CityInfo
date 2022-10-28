@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CityInfo.Data.Entities
+namespace CityInfo.Data.Entities.Movies
 {
     internal partial class TblMovie
     {

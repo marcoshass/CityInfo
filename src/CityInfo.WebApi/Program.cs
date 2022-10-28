@@ -16,7 +16,9 @@ namespace CityInfo.WebApi
             builder.Services.AddLogging();
 
             builder.Services.ConfigureSimpleInjector(container, configuration);
-            builder.Services.ConfigureQueryHandlers(container, configuration, "MoviesDb");
+            builder.Services.ConfigureDbContexts(configuration);
+            builder.Services.ConfigureQueryHandlers(container, configuration);
+            builder.Services.ConfigureCommandHandlers(container, configuration);
 
             var app = builder.Build();
             app.Services.UseSimpleInjector(container);
