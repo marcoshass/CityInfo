@@ -1,10 +1,8 @@
 using CityInfo.Data.Entities;
-using CityInfo.Data.QueriesImpl.Movies;
-using CityInfo.Data.QueriesImpl.Users;
+using CityInfo.Data.Queries.Movies;
+using CityInfo.Data.Queries.Users;
+using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries.Infrastructure;
-using CityInfo.Domain.Queries.Movies;
-using CityInfo.Domain.Queries.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace CityInfo.WebApi

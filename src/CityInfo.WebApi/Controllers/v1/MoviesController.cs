@@ -1,6 +1,6 @@
-﻿using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries.Infrastructure;
-using CityInfo.Domain.Queries.Movies;
+﻿using CityInfo.Data.Queries.Movies;
+using CityInfo.Domain.Cqrs.Query;
+using CityInfo.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1

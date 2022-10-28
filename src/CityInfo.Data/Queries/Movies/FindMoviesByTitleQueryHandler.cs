@@ -1,15 +1,9 @@
 ﻿using CityInfo.Data.Entities;
+using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries.Infrastructure;
-using CityInfo.Domain.Queries.Movies;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CityInfo.Data.QueriesImpl.Movies
+namespace CityInfo.Data.Queries.Movies
 {
     public class FindMoviesByTitleQueryHandler :
         IQueryHandlerAsync<FindMoviesByTitleQuery, ICollection<Movie>>

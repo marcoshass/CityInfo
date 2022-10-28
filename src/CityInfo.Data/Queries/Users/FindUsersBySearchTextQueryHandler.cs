@@ -1,14 +1,8 @@
 ﻿using CityInfo.Data.Entities;
+using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using CityInfo.Domain.Queries.Infrastructure;
-using CityInfo.Domain.Queries.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CityInfo.Data.QueriesImpl.Users
+namespace CityInfo.Data.Queries.Users
 {
     public class FindUsersBySearchTextQueryHandler : 
         IQueryHandlerAsync<FindUsersBySearchTextQuery, User[]>
