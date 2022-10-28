@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace CityInfo.Data.Queries.Movies
 {
     public class FindMoviesByTitleQueryHandler :
-        IQueryHandlerAsync<FindMoviesByTitleQuery, ICollection<Movie>>
+        IQueryHandler<FindMoviesByTitleQuery, ICollection<Movie>>
     {
         private readonly MoviesDBContext _context;
 
@@ -15,7 +15,7 @@ namespace CityInfo.Data.Queries.Movies
             _context = context;
         }
 
-        public async Task<ICollection<Movie>> Handle(FindMoviesByTitleQuery query)
+        public ICollection<Movie> Handle(FindMoviesByTitleQuery query)
         {
             var result =
                 from c in _context.TblMovies
@@ -29,7 +29,7 @@ namespace CityInfo.Data.Queries.Movies
                     ReleaseYear = c.ReleaseYear
                 };
 
-            return await result.ToListAsync();
+            return result.ToList();
         }
     }
 }

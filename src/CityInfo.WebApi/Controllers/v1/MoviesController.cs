@@ -9,22 +9,22 @@ namespace CityInfo.WebApi.Controllers.v1
     [ApiController]
     public class MoviesController : ControllerBase
     {
-        private readonly IQueryHandlerAsync<FindMoviesByTitleQuery, ICollection<Movie>> _handler;
+        private readonly IQueryHandler<FindMoviesByTitleQuery, ICollection<Movie>> _handler;
 
-        public MoviesController(IQueryHandlerAsync<FindMoviesByTitleQuery, ICollection<Movie>> handler)
+        public MoviesController(IQueryHandler<FindMoviesByTitleQuery, ICollection<Movie>> handler)
         {
             _handler = handler;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public ActionResult Get()
         {
             var query = new FindMoviesByTitleQuery
             {
                 Title = "Neigh"
             };
 
-            var movies = await _handler.Handle(query);
+            var movies = _handler.Handle(query);
             return Ok(movies);
         }
     }
