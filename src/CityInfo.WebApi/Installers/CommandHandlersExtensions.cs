@@ -4,6 +4,9 @@ using SimpleInjector;
 
 namespace CityInfo.WebApi.Installers
 {
+    /// <summary>
+    /// Register all ICommands automatically
+    /// </summary>
     public static class CommandHandlersExtensions
     {
         public static void ConfigureCommandHandlers(this IServiceCollection services,
