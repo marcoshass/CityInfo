@@ -9,18 +9,18 @@ namespace CityInfo.Domain.Cqrs.Paging
 {
     public sealed class PagingResult<T>
     {
-        public readonly PagingInformation Paging;
-        public readonly int PageCount;
-        public readonly int ItemCount;
-        public readonly ReadOnlyCollection<T> Page;
+        public PagingInformation Paging { get; private set; }
+        public int PageCount { get; private set; }
+        public int ItemCount { get; private set; }
+        public ReadOnlyCollection<T> Data { get; private set; }
 
-        public PagingResult(
-            PagingInformation paging, int pageCount, int itemCount, ReadOnlyCollection<T> page)
+        public PagingResult(PagingInformation paging, 
+            int pageCount, int itemCount, ReadOnlyCollection<T> page)
         {
             this.Paging = paging;
             this.PageCount = pageCount;
             this.ItemCount = itemCount;
-            this.Page = page;
+            this.Data = page;
         }
 
         public static PagingResult<T> ApplyPaging(IQueryable<T> query, PagingInformation paging)

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1
 {
-    [Route("api/users")]
+    [Route("api/v1/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {

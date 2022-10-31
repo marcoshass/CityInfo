@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1
 {
-    [Route("api/movies")]
+    [Route("api/v1/movies")]
     [ApiController]
     public class MoviesController : ControllerBase
     {

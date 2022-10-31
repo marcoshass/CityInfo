@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1
 {
-    [Route("api/customers")]
+    [Route("api/v1/customers")]
     [ApiController]
     public class CustomersController : ControllerBase
     {
@@ -20,15 +20,10 @@ namespace CityInfo.WebApi.Controllers.v1
         [HttpGet]
         public ActionResult Get()
         {
-            var query = new SearchCustomersQuery
-            {
-                Paging = new PagingInformation(0, 10),
-                Ordering = "Id DESC"
-            };
-
+            var query = new SearchCustomersQuery(0, 10, "Id ASC");
             var result = _handler.Handle(query);
 
-            return Ok(result.Page);
+            return Ok(result);
         }
     }
 }

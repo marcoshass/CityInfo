@@ -13,9 +13,19 @@ namespace CityInfo.Data.Queries.Customers
 {
     public class SearchCustomersQuery : IQuery<PagingResult<Customer>>
     {
-        public string SearchText { get; set; }
-        public string Ordering { get; set; }
+        public string? SearchText { get; set; }
+        public string? Ordering { get; set; }
         public PagingInformation Paging { get; set; }
+
+        public SearchCustomersQuery(int pageIndex, int pageSize)
+        {
+            Paging = new PagingInformation(pageIndex, pageSize);
+        }
+
+        public SearchCustomersQuery(int pageIndex, int pageSize, string ordering)
+        {
+            Paging = new PagingInformation(pageIndex, pageSize);
+        }
     }
 
     public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<Customer>>
