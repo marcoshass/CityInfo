@@ -1,6 +1,5 @@
 using CityInfo.Mvc.Data;
 using CityInfo.Mvc.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace CityInfo.Mvc
