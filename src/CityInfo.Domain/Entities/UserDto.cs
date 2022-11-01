@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Domain.Entities
 {
-    public class Customer
+    public class UserDto
     {
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-        public DateTime? DateOfBirth { get; set; }
+        public string? Name { get; set; }
     }
 }

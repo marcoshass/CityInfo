@@ -11,7 +11,7 @@ using System.Linq.Dynamic.Core;
 
 namespace CityInfo.Data.Queries.Customers
 {
-    public class SearchCustomersQuery : IQuery<PagingResult<Customer>>
+    public class SearchCustomersQuery : IQuery<PagingResult<CustomerDto>>
     {
         public string? SearchText { get; set; }
         public string? Ordering { get; set; }
@@ -28,7 +28,7 @@ namespace CityInfo.Data.Queries.Customers
         }
     }
 
-    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<Customer>>
+    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<CustomerDto>>
     {
         private readonly CustomersDBContext _context;
 
@@ -37,11 +37,11 @@ namespace CityInfo.Data.Queries.Customers
             _context = context;
         }
 
-        public PagingResult<Customer> Handle(SearchCustomersQuery query)
+        public PagingResult<CustomerDto> Handle(SearchCustomersQuery query)
         {
             var results =
                 from c in _context.TblCustomers
-                select new Customer
+                select new CustomerDto
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
@@ -54,7 +54,7 @@ namespace CityInfo.Data.Queries.Customers
                 results = results.OrderBy(query.Ordering);
             }
 
-            return PagingResult<Customer>.ApplyPaging(results, query.Paging);
+            return PagingResult<CustomerDto>.ApplyPaging(results, query.Paging);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Domain.Entities
 {
-    public class Movie
+    public class MovieDto
     {
         public int MovieId { get; set; }
         public string? MovieTitle { get; set; }

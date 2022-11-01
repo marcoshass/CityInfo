@@ -14,12 +14,12 @@ namespace CityInfo.WebApi.Controllers.v1
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly IQueryHandler<SearchCustomersQuery, PagingResult<Customer>> _querySearch;
+        private readonly IQueryHandler<SearchCustomersQuery, PagingResult<CustomerDto>> _querySearch;
         private readonly IQueryHandler<GetByIdQuery<TblCustomer>, TblCustomer> _queryGetById;
         private readonly ICommandHandler<CreateCustomerCommand> _commandHandler;
 
         public CustomersController(
-            IQueryHandler<SearchCustomersQuery, PagingResult<Customer>> handler,
+            IQueryHandler<SearchCustomersQuery, PagingResult<CustomerDto>> handler,
             IQueryHandler<GetByIdQuery<TblCustomer>, TblCustomer> queryGetById,
             ICommandHandler<CreateCustomerCommand> command)
         {
@@ -37,7 +37,7 @@ namespace CityInfo.WebApi.Controllers.v1
                 return NotFound();
             }
 
-            var record = new Customer
+            var record = new CustomerDto
             {
                 Id = customer.Id,
                 FirstName = customer.FirstName,
