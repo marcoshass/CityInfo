@@ -16,7 +16,7 @@ namespace CityInfo.WebApi
             builder.Services.AddLogging();
 
             builder.Services.ConfigureSimpleInjector(container, configuration);
-            builder.Services.ConfigureDbContexts(configuration);
+            builder.Services.ConfigureDbContext(configuration);
             builder.Services.ConfigureQueryHandlers(container, configuration);
             builder.Services.ConfigureCommandHandlers(container, configuration);
 
