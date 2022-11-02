@@ -13,20 +13,20 @@ namespace CityInfo.WebApi.Controllers.v1.Users
     public class UsersController : ControllerBase
     {
         private readonly IQueryHandlerAsync<GetUserByIdQuery, User> _getUserByIdQuery;
-        private readonly ICommandHandlerAsync<RegisterUserCommand> _registerUserCommand;
+        private readonly ICommandHandlerAsync<CreateUserCommand> _createUserCommand;
         private readonly ILogger<UsersController> _logger;
 
         public UsersController(
             IQueryHandlerAsync<GetUserByIdQuery, User> getUserByIdQuery,
-            ICommandHandlerAsync<RegisterUserCommand> registerUserCommand,
+            ICommandHandlerAsync<CreateUserCommand> registerUserCommand,
             ILogger<UsersController> logger)
         {
             _getUserByIdQuery = getUserByIdQuery;
-            _registerUserCommand = registerUserCommand;
+            _createUserCommand = registerUserCommand;
             _logger = logger;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = nameof(GetUser))]
         public async Task<ActionResult<User>> GetUser(string id, CancellationToken cancelToken)
         {
             var user = await _getUserByIdQuery.Handle(new GetUserByIdQuery { Id = id }, cancelToken);
@@ -39,28 +39,29 @@ namespace CityInfo.WebApi.Controllers.v1.Users
         }
 
         [HttpPost()]
-        public async Task<ActionResult<User>> CreateUser(CreateUserDto Input, CancellationToken cancelToken)
+        public async Task<ActionResult<User>> CreateUser(CreateUserDto Input,
+            CancellationToken cancelToken)
         {
-            if (ModelState.IsValid)
+            var command = new CreateUserCommand
             {
-                var command = new RegisterUserCommand
-                {
-                    Email = Input.Email,
-                    Password = Input.Password,
-                    ConfirmPassword = Input.ConfirmPassword
-                };
+                Email = Input.Email,
+                Password = Input.Password,
+                ConfirmPassword = Input.ConfirmPassword
+            };
 
-                await _registerUserCommand.Handle(command, cancelToken);
-
-                if (command.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-                    //command.UserId
-                    return Ok();
-                }
+            await _createUserCommand.Handle(command, cancelToken);
+            if (command.Succeeded)
+            {
+                return CreatedAtRoute(nameof(GetUser),
+                    new
+                    {
+                        id = command.UserId,
+                        cancelToken = default(CancellationToken)
+                    }, command
+                );
             }
 
-            return Problem();
+            return BadRequest(command.Errors);
         }
     }
 }

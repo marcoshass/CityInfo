@@ -36,7 +36,19 @@ namespace CityInfo.Data.Queries.Users
             {
                 Id = appUser.Id,
                 UserName = appUser.UserName,
-                NormalizedUserName = appUser.NormalizedUserName
+                NormalizedUserName = appUser.NormalizedUserName,
+                Email = appUser.Email,
+                NormalizedEmail = appUser.NormalizedEmail,
+                EmailConfirmed = appUser.EmailConfirmed,
+                PasswordHash = appUser.PasswordHash,
+                SecurityStamp = appUser.SecurityStamp,
+                ConcurrencyStamp = appUser.ConcurrencyStamp,
+                PhoneNumber = appUser.PhoneNumber,
+                PhoneNumberConfirmed = appUser.PhoneNumberConfirmed,
+                TwoFactorEnabled = appUser.TwoFactorEnabled,
+                LockoutEnd = appUser.LockoutEnd,
+                LockoutEnabled = appUser.LockoutEnabled,
+                AccessFailedCount = appUser.AccessFailedCount
             };
         }
     }

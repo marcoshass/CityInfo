@@ -15,7 +15,6 @@ namespace CityInfo.Mvc.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.HasDefaultSchema("identity");
         }
     }
 }

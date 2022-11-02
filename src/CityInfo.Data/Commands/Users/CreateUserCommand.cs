@@ -10,23 +10,25 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Data.Commands.Users
 {
-    public class RegisterUserCommand
+    public class CreateUserCommand
     {
         public string Email { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
         public bool Succeeded { get; set; }
         public string UserId { get; set; }
+
+        public List<CommandError> Errors { get; set; } = new List<CommandError>();
     }
 
-    public class RegisterUserCommandHandler : ICommandHandlerAsync<RegisterUserCommand>
+    public class CreateUserCommandHandler : ICommandHandlerAsync<CreateUserCommand>
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUserStore<ApplicationUser> _userStore;
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
 
-        public RegisterUserCommandHandler(
+        public CreateUserCommandHandler(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager)
@@ -37,7 +39,7 @@ namespace CityInfo.Data.Commands.Users
             _signInManager = signInManager;
         }
 
-        public async Task Handle(RegisterUserCommand command, CancellationToken cancelToken = default(CancellationToken))
+        public async Task Handle(CreateUserCommand command, CancellationToken cancelToken = default(CancellationToken))
         {
             var user = CreateUser();
 
@@ -50,6 +52,13 @@ namespace CityInfo.Data.Commands.Users
                 var userId = await _userManager.GetUserIdAsync(user);
                 command.Succeeded = result.Succeeded;
                 command.UserId = userId;
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    command.Errors.Add(new CommandError(error.Code, error.Description));
+                }
             }
         }
 
