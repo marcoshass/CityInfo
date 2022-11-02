@@ -14,6 +14,7 @@ namespace CityInfo.WebApi.Installers
         {
             var assemblies = new[] { typeof(DiscoveryCommandHandler).Assembly };
             container.Register(typeof(ICommandHandler<>), assemblies, Lifestyle.Scoped);
+            container.Register(typeof(ICommandHandlerAsync<>), assemblies, Lifestyle.Scoped);
         }
     }
 }

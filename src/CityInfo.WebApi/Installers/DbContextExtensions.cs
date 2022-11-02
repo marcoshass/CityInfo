@@ -1,4 +1,4 @@
-﻿using CityInfo.Data.Entities.Customers;
+﻿using CityInfo.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace CityInfo.WebApi.Installers
@@ -10,6 +10,9 @@ namespace CityInfo.WebApi.Installers
         {
             services.AddDbContext<CustomersDBContext>(options =>
                 options.UseSqlServer($"name=ConnectionStrings:CustomersDb"));
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<CustomersDBContext>();
+
         }
     }
 }

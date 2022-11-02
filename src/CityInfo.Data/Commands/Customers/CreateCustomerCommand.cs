@@ -1,10 +1,5 @@
-﻿using CityInfo.Data.Entities.Customers;
+﻿using CityInfo.Data.Model;
 using CityInfo.Domain.Cqrs.Command;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CityInfo.Data.Commands.Customers
 {

@@ -1,4 +1,4 @@
-﻿using CityInfo.Data.Entities.Customers;
+﻿using CityInfo.Data.Model;
 using CityInfo.Domain.Cqrs.Query;
 
 namespace CityInfo.Data.Queries.Infrastructure

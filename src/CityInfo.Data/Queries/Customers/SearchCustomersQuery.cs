@@ -1,17 +1,12 @@
-﻿using CityInfo.Data.Entities.Customers;
+﻿using CityInfo.Data.Model;
 using CityInfo.Domain.Cqrs.Paging;
 using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Linq.Dynamic.Core;
 
 namespace CityInfo.Data.Queries.Customers
 {
-    public class SearchCustomersQuery : IQuery<PagingResult<CustomerDto>>
+    public class SearchCustomersQuery : IQuery<PagingResult<Customer>>
     {
         public string? SearchText { get; set; }
         public string? Ordering { get; set; }
@@ -28,7 +23,7 @@ namespace CityInfo.Data.Queries.Customers
         }
     }
 
-    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<CustomerDto>>
+    public class SearchCustomersQueryHandler : IQueryHandler<SearchCustomersQuery, PagingResult<Customer>>
     {
         private readonly CustomersDBContext _context;
 
@@ -37,11 +32,11 @@ namespace CityInfo.Data.Queries.Customers
             _context = context;
         }
 
-        public PagingResult<CustomerDto> Handle(SearchCustomersQuery query)
+        public PagingResult<Customer> Handle(SearchCustomersQuery query)
         {
             var results =
                 from c in _context.TblCustomers
-                select new CustomerDto
+                select new Customer
                 {
                     Id = c.Id,
                     FirstName = c.FirstName,
@@ -54,7 +49,7 @@ namespace CityInfo.Data.Queries.Customers
                 results = results.OrderBy(query.Ordering);
             }
 
-            return PagingResult<CustomerDto>.ApplyPaging(results, query.Paging);
+            return PagingResult<Customer>.ApplyPaging(results, query.Paging);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CityInfo.Data.Entities.Customers
+namespace CityInfo.Data.Model
 {
     public partial class TblCustomer
     {

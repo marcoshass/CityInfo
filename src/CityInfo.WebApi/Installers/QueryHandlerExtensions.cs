@@ -12,6 +12,7 @@ namespace CityInfo.WebApi.Installers
         {
             var assemblies = new[] { typeof(DiscoveryQueryHandler).Assembly };
             container.Register(typeof(IQueryHandler<,>), assemblies, Lifestyle.Scoped);
+            container.Register(typeof(IQueryHandlerAsync<,>), assemblies, Lifestyle.Scoped);
             container.Register(typeof(IQueryHandler<,>), typeof(GetByIdQueryHandler<>));
             container.RegisterDecorator(typeof(IQueryHandler<,>), typeof(ValidationQueryHandlerDecorator<,>));
         }

@@ -13,6 +13,6 @@ namespace CityInfo.Domain.Cqrs.Command
 
     public interface ICommandHandlerAsync<TCommand>
     {
-        Task Handle(TCommand command);
+        Task Handle(TCommand command, CancellationToken cancelToken);
     }
 }

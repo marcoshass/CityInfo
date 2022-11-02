@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace CityInfo.Data.Entities.Customers
+namespace CityInfo.Data.Model
 {
-    public partial class CustomersDBContext : DbContext
+    public partial class CustomersDBContext : IdentityDbContext<ApplicationUser>
     {
         public CustomersDBContext()
         { }
@@ -18,14 +16,13 @@ namespace CityInfo.Data.Entities.Customers
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<TblCustomer>(entity =>
             {
                 entity.ToTable("tblCustomers");
-
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
-
                 entity.Property(e => e.FirstName).HasMaxLength(50);
-
                 entity.Property(e => e.LastName).HasMaxLength(50);
             });
 

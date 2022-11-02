@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Domain.Cqrs.Query
 {
+    public interface IQuery<TResult> { }
+
     public interface IQueryHandler<TQuery, TResult> where TQuery : IQuery<TResult>
     {
         TResult Handle(TQuery query);
