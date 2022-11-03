@@ -26,6 +26,8 @@ namespace CityInfo.WebApi.Controllers.v1.Users
             _logger = logger;
         }
 
+        // GET api/v1/users/guid
+
         [HttpGet("{id}", Name = nameof(GetUser))]
         public async Task<ActionResult<User>> GetUser(string id, CancellationToken cancelToken)
         {
@@ -37,6 +39,8 @@ namespace CityInfo.WebApi.Controllers.v1.Users
 
             return Ok(user);
         }
+
+        // POST api/v1/users
 
         [HttpPost()]
         public async Task<ActionResult<User>> CreateUser(CreateUserDto Input,
