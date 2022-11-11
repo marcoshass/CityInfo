@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Data", "src\CityIn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{72430858-8126-489C-81D5-12486D4EBC97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Mvc", "src\CityInfo.Mvc\CityInfo.Mvc.csproj", "{9AD36067-C735-4901-94C5-19270AB5EE71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Mvc", "src\CityInfo.Mvc\CityInfo.Mvc.csproj", "{9AD36067-C735-4901-94C5-19270AB5EE71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
