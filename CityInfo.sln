@@ -5,13 +5,9 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Domain", "src\CityInfo.Domain\CityInfo.Domain.csproj", "{37BA2E5D-DD64-4929-AE85-5C87F781FAFE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{6F2C7EE0-F6DE-42DF-8AD3-1C5047A15D13}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.WebApi", "src\CityInfo.WebApi\CityInfo.WebApi.csproj", "{4C164B90-8FF5-47DA-A7D9-2503FB6D31EB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Data", "src\CityInfo.Data\CityInfo.Data.csproj", "{01500BD0-4831-48F2-B09B-38749086A150}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{72430858-8126-489C-81D5-12486D4EBC97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Mvc", "src\CityInfo.Mvc\CityInfo.Mvc.csproj", "{9AD36067-C735-4901-94C5-19270AB5EE71}"
 EndProject
@@ -40,12 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{37BA2E5D-DD64-4929-AE85-5C87F781FAFE} = {6F2C7EE0-F6DE-42DF-8AD3-1C5047A15D13}
-		{4C164B90-8FF5-47DA-A7D9-2503FB6D31EB} = {6F2C7EE0-F6DE-42DF-8AD3-1C5047A15D13}
-		{01500BD0-4831-48F2-B09B-38749086A150} = {6F2C7EE0-F6DE-42DF-8AD3-1C5047A15D13}
-		{9AD36067-C735-4901-94C5-19270AB5EE71} = {72430858-8126-489C-81D5-12486D4EBC97}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2929A6FE-E76B-4464-AC5A-56C04A836767}

@@ -3,7 +3,7 @@ using CityInfo.Data.Queries.Users;
 using CityInfo.Domain.Cqrs.Command;
 using CityInfo.Domain.Cqrs.Query;
 using CityInfo.Domain.Entities;
-using CityInfo.WebApi.Models.v1.Users;
+using CityInfo.WebApi.DTOs.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CityInfo.WebApi.Controllers.v1.Users
@@ -43,7 +43,7 @@ namespace CityInfo.WebApi.Controllers.v1.Users
         // POST api/v1/users
 
         [HttpPost()]
-        public async Task<ActionResult<User>> CreateUser(CreateUserDto Input,
+        public async Task<ActionResult<User>> CreateUser(AddUserRequest Input,
             CancellationToken cancelToken)
         {
             var command = new CreateUserCommand
