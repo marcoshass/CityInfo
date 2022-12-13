@@ -1,35 +1,44 @@
+using Autofac.Extensions.DependencyInjection;
+using FrontDesk.Infrastructure.Data;
+
 namespace FrontDesk.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var host = CreateHostBuilder(args)
+                .Build();
 
-            // Add services to the container.
-
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            using (var scope = host.Services.CreateScope())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                var services = scope.ServiceProvider;
+                var hostEnvironment = services.GetService<IWebHostEnvironment>();
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                var logger = loggerFactory.CreateLogger<Program>();
+                logger.LogInformation($"Starting in environment {hostEnvironment.EnvironmentName}");
+                try
+                {
+                    var seedService = services.GetRequiredService<AppDbContextSeed>();
+                    await seedService.SeedAsync(new OfficeSettings().TestDate);
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "An error occurred seeding the DB.");
+                }
             }
 
-            app.UseHttpsRedirection();
+            host.Run();
+        }
 
-            app.UseAuthorization();
-
-
-            app.MapControllers();
-
-            app.Run();
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
         }
     }
 }

@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Events\IntegrationEvents\" />
     <Folder Include="ScheduleAggregate\Specifications\" />
     <Folder Include="Services\" />
     <Folder Include="SyncedAggregates\Specifications\" />

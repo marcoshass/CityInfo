@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace FrontDesk.Core.ValueObjects
 {
-    public class AnymalType : ValueObject
+    public class AnimalType : ValueObject
     {
         public string Species { get; private set; }
         public string Breed { get; private set; }
 
-        public AnymalType()
+        public AnimalType()
         {
             // EF
         }
 
-        public AnymalType(string species, string breed)
+        public AnimalType(string species, string breed)
         {
             Species= species;
             Breed= breed;

@@ -25,6 +25,7 @@
 
 	<ItemGroup>
     <ProjectReference Include="..\..\..\..\..\..\pluralsight-ddd-fundamentals-source\SharedKernel\src\PluralsightDdd.SharedKernel\PluralsightDdd.SharedKernel.csproj" />
+    <ProjectReference Include="..\BlazorShared\BlazorShared.csproj" />
     <ProjectReference Include="..\FrontDesk.Core\FrontDesk.Core.csproj" />
   </ItemGroup>
 
