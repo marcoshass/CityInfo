@@ -42,7 +42,6 @@ namespace FrontDesk.Infrastructure
             {
                 RegisterProductionOnlyDependencies(builder);
             }
-
             RegisterCommonDependencies(builder);
         }
 
@@ -57,12 +56,12 @@ namespace FrontDesk.Infrastructure
 
             // add a cache
             builder.RegisterGeneric(typeof(CachedRepository<>))
-                .As(typeof(IReadRepository<>))
+              .As(typeof(IReadRepository<>))
                 .InstancePerLifetimeScope();
 
             builder.RegisterType(typeof(RabbitMessagePublisher))
-                .As(typeof(IMessagePublisher))
-                .InstancePerLifetimeScope();
+              .As(typeof(IMessagePublisher))
+              .InstancePerLifetimeScope();
 
             // MediatR is registered in FrontDesk.Api
             //      builder
@@ -86,18 +85,16 @@ namespace FrontDesk.Infrastructure
             //        .AsImplementedInterfaces();
             //      }
 
-            builder.Register<ServiceFactory>(context => 
-            { 
+            builder.Register<ServiceFactory>(context =>
+            {
                 var c = context.Resolve<IComponentContext>();
                 return t => c.Resolve(t);
             });
 
-            builder.RegisterType<EmailSender>()
-                .As<IEmailSender>()
+            builder.RegisterType<EmailSender>().As<IEmailSender>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<AppDbContextSeed>()
-                .InstancePerLifetimeScope();
+            builder.RegisterType<AppDbContextSeed>().InstancePerLifetimeScope();
         }
 
         private void RegisterDevelopmentOnlyDependencies(ContainerBuilder builder)
@@ -110,4 +107,5 @@ namespace FrontDesk.Infrastructure
             // Add production only services
         }
     }
+
 }

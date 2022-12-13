@@ -15,9 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ScheduleAggregate\Specifications\" />
     <Folder Include="Services\" />
-    <Folder Include="SyncedAggregates\Specifications\" />
   </ItemGroup>
 
 </Project>

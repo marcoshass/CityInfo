@@ -49,7 +49,7 @@ namespace FrontDesk.Infrastructure.Data
             return _sourceRepository.DeleteRangeAsync(entities);
         }
 
-        public Task<T?> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default) where TId : notnull
+        public Task<T> GetByIdAsync<TId>(TId id, CancellationToken cancellationToken = default)
         {
             string key = $"{typeof(T).Name}-{id}";
             _logger.LogInformation("Checking cache for " + key);
