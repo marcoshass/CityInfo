@@ -1,5 +1,5 @@
 using CityInfo.Application.Commands.Customers;
-using CityInfo.Core.Interfaces;
+using CityInfo.Core.SharedKernel.Repository;
 using CityInfo.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

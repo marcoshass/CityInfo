@@ -24,12 +24,18 @@ namespace CityInfo.Api.Endpoints.Customers
         /// <returns></returns>
         [Route("")]
         [HttpPost]
-        [ProducesResponseType(typeof(CreateCustomerResponse) , (int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(CreateCustomerResponse), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create(
             [FromBody] CreateCustomerRequest request)
         {
             var customer = await _mediator.Send(
-                new CreateCustomerCommand(request.Email, request.Name)
+                new CreateCustomerCommand(
+                    request.FirstName,
+                    request.LastName,
+                    request.DateOfBirth,
+                    request.Phone,
+                    request.Address
+                )
             );
 
             return Created(string.Empty, customer);

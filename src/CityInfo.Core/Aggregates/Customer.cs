@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Core.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,35 +8,36 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Core.Aggregates
 {
-    public class Customer
+    public class Customer : BaseEntity<int>, IAggregateRoot
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; private set; }
 
-        public string LastName { get; set; }
+        public string? LastName { get; private set; }
 
-        public DateTime? Birthday { get; set; }
+        public DateTime? DateOfBirth { get; private set; }
 
-        public int? Age { get; set; }
+        public string? Phone { get; private set; }
 
-        public string Phone { get; set; }
+        public Address Address { get; private set; }
 
-        public static Customer Create(
-            string email,
-            string name)
+        public Customer() // Required for EF
+        { }
+
+        public Customer(Guid id,
+            string firstName,
+            string? lastName,
+            DateTime? dateOfBirth,
+            string? phone,
+            Address address)
         {
-            // Check Invariant
-
-            return new Customer
-            {
-                Id = Guid.NewGuid(),
-                FirstName = name,
-                LastName = name,
-                Birthday = null,
-                Age = null,
-                Phone = "",
-            };
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            Phone = phone;
+            Address = address;
         }
     }
 }

@@ -1,13 +1,9 @@
-﻿using CityInfo.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Core.SharedKernel.Repository;
 
 namespace CityInfo.Infrastructure.Data
 {
-    public class EfRepository<T> : RepositoryBase<T>, IRepository<T> where T : class
+    public class EfRepository<T> : RepositoryBase<T>, IRepository<T> where T : class, IAggregateRoot
     {
         public EfRepository(AppDbContext dbContext) : base(dbContext)
         {

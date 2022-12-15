@@ -48,11 +48,15 @@ namespace CityInfo.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Age = table.Column<int>(type: "int", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FirstName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    AddressAddress1 = table.Column<string>(name: "Address_Address1", type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    AddressAddress2 = table.Column<string>(name: "Address_Address2", type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    AddressCity = table.Column<string>(name: "Address_City", type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    AddressState = table.Column<string>(name: "Address_State", type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    AddressZip = table.Column<string>(name: "Address_Zip", type: "nvarchar(10)", maxLength: 10, nullable: true)
                 },
                 constraints: table =>
                 {

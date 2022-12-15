@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Core.Interfaces
+namespace CityInfo.Core.SharedKernel.Events
 {
-    public interface IRepository<T> : IRepositoryBase<T>, IReadRepositoryBase<T> where T : class
+    public interface IHandle<T> where T : BaseDomainEvent
     {
+        Task HandleAsync(T args);
     }
 }
