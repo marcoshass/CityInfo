@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Data", "src\CityIn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Mvc", "src\CityInfo.Mvc\CityInfo.Mvc.csproj", "{9AD36067-C735-4901-94C5-19270AB5EE71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Core", "src\CityInfo.Core\CityInfo.Core.csproj", "{A0FD87CD-4561-491F-921C-87F73ADFED86}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Core", "src\CityInfo.Core\CityInfo.Core.csproj", "{A0FD87CD-4561-491F-921C-87F73ADFED86}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{074A6CC5-6541-4792-AE38-C8735360E36B}"
 EndProject
@@ -19,7 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7136D5D6-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "arc", "arc", "{0A9D6E20-9B34-46E7-9404-EA056360437F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Infrastructure", "src\CityInfo.Infrastructure\CityInfo.Infrastructure.csproj", "{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Infrastructure", "src\CityInfo.Infrastructure\CityInfo.Infrastructure.csproj", "{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Api", "src\CityInfo.Api\CityInfo.Api.csproj", "{6064025D-D310-4AB5-92F5-4483ADDCED6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Application", "src\CityInfo.Application\CityInfo.Application.csproj", "{606FAE1B-077C-4D06-884A-2C51F32B242D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6064025D-D310-4AB5-92F5-4483ADDCED6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6064025D-D310-4AB5-92F5-4483ADDCED6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6064025D-D310-4AB5-92F5-4483ADDCED6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6064025D-D310-4AB5-92F5-4483ADDCED6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606FAE1B-077C-4D06-884A-2C51F32B242D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606FAE1B-077C-4D06-884A-2C51F32B242D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606FAE1B-077C-4D06-884A-2C51F32B242D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606FAE1B-077C-4D06-884A-2C51F32B242D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +74,8 @@ Global
 		{9AD36067-C735-4901-94C5-19270AB5EE71} = {0A9D6E20-9B34-46E7-9404-EA056360437F}
 		{A0FD87CD-4561-491F-921C-87F73ADFED86} = {074A6CC5-6541-4792-AE38-C8735360E36B}
 		{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A} = {074A6CC5-6541-4792-AE38-C8735360E36B}
+		{6064025D-D310-4AB5-92F5-4483ADDCED6C} = {074A6CC5-6541-4792-AE38-C8735360E36B}
+		{606FAE1B-077C-4D06-884A-2C51F32B242D} = {074A6CC5-6541-4792-AE38-C8735360E36B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2929A6FE-E76B-4464-AC5A-56C04A836767}
