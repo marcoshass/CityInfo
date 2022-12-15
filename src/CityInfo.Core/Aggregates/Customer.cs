@@ -30,10 +30,10 @@ namespace CityInfo.Core.Aggregates
             {
                 Id = Guid.NewGuid(),
                 FirstName = name,
-                LastName = null,
+                LastName = name,
                 Birthday = null,
                 Age = null,
-                Phone = null,
+                Phone = "",
             };
         }
     }
