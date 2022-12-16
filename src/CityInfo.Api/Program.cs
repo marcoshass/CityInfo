@@ -1,5 +1,4 @@
-using CityInfo.Application.Commands.Customers;
-using CityInfo.Core.SharedKernel.Repository;
+using CityInfo.Core.SharedKernel.DDD;
 using CityInfo.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +16,7 @@ namespace CityInfo.Api
 
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
-            builder.Services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(CreateCustomerCommandHandler).Assembly);
+            builder.Services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(IAggregateRoot).Assembly);
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));

@@ -14,6 +14,7 @@ namespace CityInfo.Api.Models.Customers
 
         public string? Phone { get; set; }
 
-        public Address? Address { get; set; }
+        [Required]
+        public Address Address { get; set; }
     }
 }

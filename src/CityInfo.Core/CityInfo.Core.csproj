@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Specification.EntityFrameworkCore" Version="6.1.0" />
     <PackageReference Include="MediatR" Version="11.1.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="Cqrs\Commands\" />
+    <Folder Include="Cqrs\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using CityInfo.Api.Models.Customers;
-using CityInfo.Application.Commands.Customers;
+using CityInfo.Core.Aggregates;
+using CityInfo.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -10,11 +11,11 @@ namespace CityInfo.Api.Endpoints.Customers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IRepository<Customer> _repo;
 
-        public CustomersController(IMediator mediator)
+        public CustomersController(IRepository<Customer> repo)
         {
-            _mediator = mediator;
+            _repo = repo;
         }
 
         /// <summary>
@@ -24,21 +25,23 @@ namespace CityInfo.Api.Endpoints.Customers
         /// <returns></returns>
         [Route("")]
         [HttpPost]
-        [ProducesResponseType(typeof(CreateCustomerResponse), (int)HttpStatusCode.Created)]
-        public async Task<IActionResult> Create(
-            [FromBody] CreateCustomerRequest request)
+        [ProducesResponseType(typeof(CustomerDto), (int)HttpStatusCode.Created)]
+        public async Task<IActionResult> Create([FromBody] CreateCustomerRequest request, 
+            CancellationToken cancellationToken = default)
         {
-            var customer = await _mediator.Send(
-                new CreateCustomerCommand(
+            var newCustomer = await _repo.AddAsync(
+                new Customer(Guid.NewGuid(),
                     request.FirstName,
                     request.LastName,
                     request.DateOfBirth,
                     request.Phone,
-                    request.Address
-                )
+                    request.Address)
             );
 
-            return Created(string.Empty, customer);
+            var response = new CustomerDto(newCustomer.Id);
+            await _repo.SaveChangesAsync(cancellationToken);
+
+            return Created(string.Empty, response);
         }
     }
 }

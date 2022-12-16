@@ -17,6 +17,7 @@ public partial class AppDbContext : DbContext
     {
     }
     public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Order> Orders { get; set; }
     public virtual DbSet<Client> Clients { get; set; }
     public virtual DbSet<Doctor> Doctors { get; set; }
     public virtual DbSet<Room> Rooms { get; set; }

@@ -1,23 +1,24 @@
-﻿using System;
+﻿using CityInfo.Core.SharedKernel.DDD;
+using System;
 using System.Collections.Generic;
 
 namespace CityInfo.Core.Aggregates;
 
-public partial class Patient
+public class Patient : BaseEntity<int>, IAggregateRoot
 {
-    public int Id { get; set; }
+    public int Id { get; private set; }
 
-    public int ClientId { get; set; }
+    public int ClientId { get; private set; }
 
-    public string? Name { get; set; }
+    public string? Name { get; private set; }
 
-    public string? Sex { get; set; }
+    public string? Sex { get; private set; }
 
-    public string? AnimalTypeSpecies { get; set; }
+    public string? AnimalTypeSpecies { get; private set; }
 
-    public string? AnimalTypeBreed { get; set; }
+    public string? AnimalTypeBreed { get; private set; }
 
-    public int? PreferredDoctorId { get; set; }
+    public int? PreferredDoctorId { get; private set; }
 
-    public virtual Client Client { get; set; } = null!;
+    public virtual Client Client { get; private set; } = null!;
 }

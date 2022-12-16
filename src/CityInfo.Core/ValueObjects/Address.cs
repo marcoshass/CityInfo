@@ -1,6 +1,7 @@
 ﻿using CityInfo.Core.SharedKernel.DDD;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,9 +10,12 @@ namespace CityInfo.Core.ValueObjects
 {
     public class Address : ValueObject
     {
+        [Required]
         public string? Address1 { get; private set; }
         public string? Address2 { get; private set; }
+        [Required]
         public string? City { get; private set; }
+        [Required]
         public string? State { get; private set; }
         public string? Zip { get; private set; }
 

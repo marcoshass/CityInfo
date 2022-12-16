@@ -39,5 +39,15 @@ namespace CityInfo.Core.Aggregates
             Phone = phone;
             Address = address;
         }
+
+        private readonly List<Order> _orders = new List<Order>();
+        public IEnumerable<Order> Orders => _orders.AsReadOnly();
+
+        public Order AddOrder(Order order)
+        {
+            _orders.Add(order);
+
+            return order;
+        }
     }
 }
