@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification.EntityFrameworkCore;
 using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Core.SharedKernel.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

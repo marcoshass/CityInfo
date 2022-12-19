@@ -18,5 +18,29 @@ public class Client : BaseEntity<int>, IAggregateRoot
 
     public int PreferredDoctorId { get; private set; }
 
-    public virtual ICollection<Patient> Patients { get; } = new List<Patient>();
+    private readonly List<Patient> _patients = new List<Patient>();
+    public IEnumerable<Patient> Patients => _patients.AsReadOnly();
+
+    public Client()
+    { }
+
+    public Client(string? fullName,
+        string? preferredName,
+        string? salutation,
+        string? emailAddress,
+        int preferredDoctorId)
+    {
+        FullName = fullName;
+        PreferredName = preferredName;
+        Salutation = salutation;
+        EmailAddress = emailAddress;
+        PreferredDoctorId = preferredDoctorId;
+    }
+
+    public Patient AddPatient(Patient patient)
+    {
+        _patients.Add(patient);
+
+        return patient;
+    }
 }

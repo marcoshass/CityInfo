@@ -1,5 +1,6 @@
 ﻿using CityInfo.Api.Models.Customers;
 using CityInfo.Core.Aggregates;
+using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Data;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

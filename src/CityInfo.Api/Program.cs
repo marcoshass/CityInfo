@@ -1,4 +1,5 @@
 using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

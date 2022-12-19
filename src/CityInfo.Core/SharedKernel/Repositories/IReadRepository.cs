@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Infrastructure.Data
+namespace CityInfo.Core.SharedKernel.Repositories
 {
     public interface IReadRepository<T> : IReadRepositoryBase<T> where T : class, IAggregateRoot
     {
