@@ -17,10 +17,5 @@ namespace CityInfo.Infrastructure.Cqrs.Queries.Orders
         {
             CustomerId = customerId;
         }
-
-        public GetOrdersQuery()
-        {
-
-        }
     }
 }

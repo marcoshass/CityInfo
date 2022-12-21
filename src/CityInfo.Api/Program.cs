@@ -3,6 +3,7 @@ using CityInfo.Core.SharedKernel.DDD;
 using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Cqrs.Queries.Orders;
 using CityInfo.Infrastructure.Data;
+using CityInfo.Infrastructure.Validation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;

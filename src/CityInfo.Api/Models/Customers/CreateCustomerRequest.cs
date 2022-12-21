@@ -5,7 +5,6 @@ namespace CityInfo.Api.Models.Customers
 {
     public class CreateCustomerRequest
     {
-        [Required]
         public string FirstName { get; set; }
 
         public string? LastName { get; set; }
@@ -14,7 +13,6 @@ namespace CityInfo.Api.Models.Customers
 
         public string? Phone { get; set; }
 
-        [Required]
         public Address Address { get; set; }
     }
 }

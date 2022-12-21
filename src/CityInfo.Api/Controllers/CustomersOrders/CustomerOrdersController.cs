@@ -2,23 +2,21 @@
 using CityInfo.Core.Aggregates;
 using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Cqrs.Queries.Orders;
-using CityInfo.Infrastructure.Data;
 using CityInfo.Infrastructure.Dtos.Orders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using System.Threading;
 
-namespace CityInfo.Api.Endpoints.Orders
+namespace CityInfo.Api.Controllers.CustomersOrders
 {
     [Route("api/customers")]
     [ApiController]
-    public class OrdersController : ControllerBase
+    public class CustomerOrdersController : ControllerBase
     {
         private readonly IRepository<Customer> _customerRepo;
         private readonly IMediator _mediator;
 
-        public OrdersController(IRepository<Customer> customerRepo, 
+        public CustomerOrdersController(IRepository<Customer> customerRepo,
             IMediator mediator)
         {
             _customerRepo = customerRepo;
@@ -36,8 +34,43 @@ namespace CityInfo.Api.Endpoints.Orders
         public async Task<IActionResult> GetOrders(Guid customerId)
         {
             var orders = await _mediator.Send(new GetOrdersQuery(customerId));
+
             var response = new GetOrdersResponse(orders);
+
             return Ok(response);
+        }
+
+
+        [Route("{customerId}/orders/{orderId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(OrderDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetCustomerOrderDetails([FromRoute] int orderId)
+        {
+            // Há 02 opções aqui:
+            // 1 - Criar um query method que utiliza o include ou consulta
+            // a tabela Order diretamente, isso é conceitualmente errado pois
+            // permite consultar Order diretamente sem passar por um Customer
+
+            // 2 - Utilizar o framework specification e permitir o include
+            // das Orders do Customer. Conceitualmente este approach é mais
+            // correto pois permite a query apenas pelo AggregateRoot
+
+            //var order = await _orderRepo.GetByIdAsync(orderId);
+            //if (order == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var response = new OrderDto
+            //{
+            //    Id = order.Id,
+            //    Amount = order.Amount,
+            //    CustomerId = order.CustomerId,
+            //};
+
+            //return Ok(response);
+
+            return Ok();
         }
 
         /// <summary>
@@ -49,9 +82,9 @@ namespace CityInfo.Api.Endpoints.Orders
         /// <returns></returns>
         [Route("{customerId}/orders")]
         [HttpPost]
-        [ProducesResponseType(typeof(OrderDto),(int)HttpStatusCode.Created)]
+        [ProducesResponseType(typeof(OrderDto), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> AddCustomerOrder(
-            Guid customerId, 
+            Guid customerId,
             CreateOrderRequest request,
             CancellationToken cancellationToken = default)
         {
