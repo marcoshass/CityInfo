@@ -1,7 +1,9 @@
 ﻿using CityInfo.Api.Models.Orders;
 using CityInfo.Core.Aggregates;
 using CityInfo.Core.SharedKernel.Repositories;
+using CityInfo.Infrastructure.Cqrs.Queries.Orders;
 using CityInfo.Infrastructure.Data;
+using CityInfo.Infrastructure.Dtos.Orders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -14,10 +16,13 @@ namespace CityInfo.Api.Endpoints.Orders
     public class OrdersController : ControllerBase
     {
         private readonly IRepository<Customer> _customerRepo;
+        private readonly IMediator _mediator;
 
-        public OrdersController(IRepository<Customer> customerRepo)
+        public OrdersController(IRepository<Customer> customerRepo, 
+            IMediator mediator)
         {
             _customerRepo = customerRepo;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -30,10 +35,9 @@ namespace CityInfo.Api.Endpoints.Orders
         [ProducesResponseType(typeof(GetOrdersResponse), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetOrders(Guid customerId)
         {
-            //var orders = await _mediator.Send(new GetOrdersQuery(customerId));
-            //var response = new GetOrdersResponse(orders);
-            //return Ok(response);
-            return Ok();
+            var orders = await _mediator.Send(new GetOrdersQuery(customerId));
+            var response = new GetOrdersResponse(orders);
+            return Ok(response);
         }
 
         /// <summary>

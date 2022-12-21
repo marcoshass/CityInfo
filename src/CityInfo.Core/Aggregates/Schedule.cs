@@ -7,8 +7,8 @@ namespace CityInfo.Core.Aggregates;
 public class Schedule : BaseEntity<Guid>, IAggregateRoot
 {
     public Guid Id { get; private set; }
-
     public int ClinicId { get; private set; }
 
-    public virtual ICollection<Appointment> Appointments { get; } = new List<Appointment>();
+    private readonly List<Appointment> _appointments = new List<Appointment>();
+    public IEnumerable<Appointment> Appointments => _appointments.AsReadOnly();
 }

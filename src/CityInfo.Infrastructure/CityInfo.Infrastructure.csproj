@@ -22,4 +22,8 @@
     <ProjectReference Include="..\CityInfo.Core\CityInfo.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Cqrs\Commands\" />
+  </ItemGroup>
+
 </Project>

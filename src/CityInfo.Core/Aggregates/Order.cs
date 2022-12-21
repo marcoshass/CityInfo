@@ -9,16 +9,16 @@ namespace CityInfo.Core.Aggregates
 {
     public class Order : BaseEntity<int>
     {
-        public Order() { } // EF Required
+        public int Id { get; private set; }
+        public decimal Amount { get; private set; }
+        public Guid CustomerId { get; private set; }
+
+        private Order() { } // EF Required
 
         public Order(decimal amount, Guid customerId)
         {
             Amount = amount;
             CustomerId = customerId;
         }
-
-        public int Id { get; private set; }
-        public decimal Amount { get; private set; }
-        public Guid CustomerId { get; private set; }
     }
 }

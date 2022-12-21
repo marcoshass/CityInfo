@@ -22,7 +22,7 @@ namespace CityInfo.Core.Aggregates
 
         public Address Address { get; private set; }
 
-        public Customer() // Required for EF
+        private Customer() // Required for EF
         { }
 
         public Customer(Guid id,

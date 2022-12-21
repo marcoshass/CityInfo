@@ -11,10 +11,10 @@ namespace CityInfo.Infrastructure.Data.EFMappings
 {
     public class OrderMapping : IEntityTypeConfiguration<Order>
     {
-        public void Configure(EntityTypeBuilder<Order> entity)
+        public void Configure(EntityTypeBuilder<Order> builder)
         {
-            entity.ToTable("Orders").HasKey(x => x.Id);
-            entity.Property(x => x.Amount).HasPrecision(14, 2);
+            builder.ToTable("Orders").HasKey(x => x.Id);
+            builder.Property(x => x.Amount).HasPrecision(14, 2);
         }
     }
 }

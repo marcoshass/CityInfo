@@ -7,6 +7,14 @@ namespace CityInfo.Core.Aggregates;
 public class Room : BaseEntity<int>, IAggregateRoot
 {
     public int Id { get; private set; }
-
     public string? Name { get; private set; }
+
+    private Room()
+    { }
+
+    public Room(int id, string? name)
+    {
+        Id = id;
+        Name = name;
+    }
 }

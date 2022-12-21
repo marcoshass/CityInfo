@@ -31,4 +31,38 @@ public class Appointment : BaseEntity<Guid>
     public bool? IsPotentiallyConflicting { get; private set; }
 
     public virtual Schedule Schedule { get; private set; } = null!;
+
+    private Appointment()
+    {
+
+    }
+
+    public Appointment(Guid id, 
+        Guid scheduleId, 
+        int clientId, 
+        int patientId, 
+        int roomId, 
+        int doctorId, 
+        int appointmentTypeId, 
+        DateTimeOffset? timeRangeStart, 
+        DateTimeOffset? timeRangeEnd, 
+        string? title, 
+        DateTimeOffset? dateTimeConfirmed, 
+        bool? isPotentiallyConflicting, 
+        Schedule schedule)
+    {
+        Id = id;
+        ScheduleId = scheduleId;
+        ClientId = clientId;
+        PatientId = patientId;
+        RoomId = roomId;
+        DoctorId = doctorId;
+        AppointmentTypeId = appointmentTypeId;
+        TimeRangeStart = timeRangeStart;
+        TimeRangeEnd = timeRangeEnd;
+        Title = title;
+        DateTimeConfirmed = dateTimeConfirmed;
+        IsPotentiallyConflicting = isPotentiallyConflicting;
+        Schedule = schedule;
+    }
 }

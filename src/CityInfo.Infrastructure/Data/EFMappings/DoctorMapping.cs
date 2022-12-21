@@ -11,9 +11,9 @@ namespace CityInfo.Infrastructure.Data.EFMappings
 {
     public class DoctorMapping : IEntityTypeConfiguration<Doctor>
     {
-        public void Configure(EntityTypeBuilder<Doctor> entity)
+        public void Configure(EntityTypeBuilder<Doctor> builder)
         {
-            entity.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.Name).HasMaxLength(50);
         }
     }
 }

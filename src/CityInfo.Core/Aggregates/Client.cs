@@ -21,7 +21,7 @@ public class Client : BaseEntity<int>, IAggregateRoot
     private readonly List<Patient> _patients = new List<Patient>();
     public IEnumerable<Patient> Patients => _patients.AsReadOnly();
 
-    public Client()
+    private Client()
     { }
 
     public Client(string? fullName,

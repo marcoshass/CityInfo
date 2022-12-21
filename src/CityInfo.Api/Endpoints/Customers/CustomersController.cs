@@ -2,6 +2,7 @@
 using CityInfo.Core.Aggregates;
 using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Data;
+using CityInfo.Infrastructure.Dtos.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

@@ -1,4 +1,6 @@
-﻿namespace CityInfo.Api.Models.Orders
+﻿using CityInfo.Infrastructure.Dtos.Orders;
+
+namespace CityInfo.Api.Models.Orders
 {
     public class GetOrdersResponse
     {

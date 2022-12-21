@@ -11,9 +11,9 @@ namespace CityInfo.Infrastructure.Data.EFMappings
 {
     public class RoomMapping : IEntityTypeConfiguration<Room>
     {
-        public void Configure(EntityTypeBuilder<Room> entity)
+        public void Configure(EntityTypeBuilder<Room> builder)
         {
-            entity.Property(e => e.Name).HasMaxLength(50);
+            builder.Property(e => e.Name).HasMaxLength(50);
         }
     }
 }

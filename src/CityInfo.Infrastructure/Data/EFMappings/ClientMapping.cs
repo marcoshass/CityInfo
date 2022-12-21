@@ -11,12 +11,12 @@ namespace CityInfo.Infrastructure.Data.EFMappings
 {
     public class ClientMapping : IEntityTypeConfiguration<Client>
     {
-        public void Configure(EntityTypeBuilder<Client> entity)
+        public void Configure(EntityTypeBuilder<Client> builder)
         {
-            entity.Property(e => e.EmailAddress).HasMaxLength(50);
-            entity.Property(e => e.FullName).HasMaxLength(50);
-            entity.Property(e => e.PreferredName).HasMaxLength(50);
-            entity.Property(e => e.Salutation).HasMaxLength(50);
+            builder.Property(e => e.EmailAddress).HasMaxLength(50);
+            builder.Property(e => e.FullName).HasMaxLength(50);
+            builder.Property(e => e.PreferredName).HasMaxLength(50);
+            builder.Property(e => e.Salutation).HasMaxLength(50);
         }
     }
 }

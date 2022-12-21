@@ -21,4 +21,26 @@ public class Patient : BaseEntity<int>, IAggregateRoot
     public int? PreferredDoctorId { get; private set; }
 
     public virtual Client Client { get; private set; } = null!;
+
+    private Patient()
+    { }
+
+    public Patient(int id,
+        int clientId,
+        string? name,
+        string? sex,
+        string? animalTypeSpecies,
+        string? animalTypeBreed,
+        int? preferredDoctorId,
+        Client client)
+    {
+        Id = id;
+        ClientId = clientId;
+        Name = name;
+        Sex = sex;
+        AnimalTypeSpecies = animalTypeSpecies;
+        AnimalTypeBreed = animalTypeBreed;
+        PreferredDoctorId = preferredDoctorId;
+        Client = client;
+    }
 }

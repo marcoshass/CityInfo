@@ -11,9 +11,9 @@ namespace CityInfo.Infrastructure.Data.EFMappings
 {
     public class ScheduleMapping : IEntityTypeConfiguration<Schedule>
     {
-        public void Configure(EntityTypeBuilder<Schedule> entity)
+        public void Configure(EntityTypeBuilder<Schedule> builder)
         {
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            builder.Property(e => e.Id).ValueGeneratedNever();
         }
     }
 }
