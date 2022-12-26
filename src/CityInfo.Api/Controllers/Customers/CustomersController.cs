@@ -1,6 +1,4 @@
 ﻿using CityInfo.Api.Models.Customers;
-using CityInfo.Core.Aggregates;
-using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Cqrs.Commands;
 using CityInfo.Infrastructure.Dtos.Customers;
 using MediatR;

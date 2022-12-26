@@ -26,3 +26,4 @@ http://www.kamilgrzybek.com/design/rest-api-data-validation/
 http://www.kamilgrzybek.com/design/simple-cqrs-implementation-with-raw-sql-and-ddd/
 http://www.kamilgrzybek.com/design/simple-cqrs-implementation-with-raw-sql-and-ddd/
 https://www.kamilgrzybek.com/tag/ddd/
+https://dottutorials.net/upload-image-video-file-using-form-data-dot-net/

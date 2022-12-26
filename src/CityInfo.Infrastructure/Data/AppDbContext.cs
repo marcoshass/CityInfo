@@ -25,6 +25,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<AppointmentType> AppointmentTypes { get; set; }
     public virtual DbSet<Appointment> Appointments { get; set; }
     public virtual DbSet<Schedule> Schedules { get; set; }
+    public virtual DbSet<Outbox> Outboxes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

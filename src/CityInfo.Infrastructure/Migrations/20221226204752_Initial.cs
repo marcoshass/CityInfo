@@ -77,6 +77,21 @@ namespace CityInfo.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Outbox",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    aggregatetype = table.Column<string>(name: "aggregate_type", type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    aggregateid = table.Column<string>(name: "aggregate_id", type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    type = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    payload = table.Column<string>(type: "text", unicode: false, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Outbox", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Rooms",
                 columns: table => new
                 {
@@ -203,6 +218,9 @@ namespace CityInfo.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Outbox");
 
             migrationBuilder.DropTable(
                 name: "Patients");

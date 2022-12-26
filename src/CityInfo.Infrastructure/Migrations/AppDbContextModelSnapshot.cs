@@ -192,6 +192,36 @@ namespace CityInfo.Infrastructure.Migrations
                     b.ToTable("Orders", (string)null);
                 });
 
+            modelBuilder.Entity("CityInfo.Core.Aggregates.Outbox", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("aggregate_id")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("aggregate_type")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("payload")
+                        .IsRequired()
+                        .IsUnicode(false)
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Outbox", (string)null);
+                });
+
             modelBuilder.Entity("CityInfo.Core.Aggregates.Patient", b =>
                 {
                     b.Property<int>("Id")
