@@ -1,7 +1,12 @@
+using CityInfo.Api.Exceptions;
 using CityInfo.Application.Cqrs.Queries;
+using CityInfo.Application.Services;
 using CityInfo.Core.Data;
+using CityInfo.Core.Services;
+using CityInfo.Core.SharedKernel.Exceptions;
 using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Infrastructure.Data;
+using Hellang.Middleware.ProblemDetails;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +22,18 @@ namespace CityInfo.Api
 
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
-            builder.Services.AddMediatR(typeof(IQuery<>).Assembly);
+            builder.Services.AddProblemDetails(x => 
+            {
+                x.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+            });
 
+            builder.Services.AddMediatR(typeof(IQuery<>).Assembly);
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
             builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+
+            // Domain Services
+            builder.Services.AddScoped(typeof(ICustomerUniquenessChecker), typeof(CustomerUniquenessChecker));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

@@ -1,4 +1,6 @@
-﻿using CityInfo.Core.SharedKernel.DDD;
+﻿using CityInfo.Core.Services;
+using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Core.SharedKernel.Exceptions;
 using CityInfo.Core.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -25,7 +27,7 @@ namespace CityInfo.Core.Aggregates
         private Customer() // Required for EF
         { }
 
-        public Customer(Guid id,
+        private Customer(Guid id,
             string firstName,
             string? lastName,
             DateTime? dateOfBirth,
@@ -40,6 +42,22 @@ namespace CityInfo.Core.Aggregates
             Address = address;
         }
 
+        public async static Task<Customer> Create(Guid id,
+            string firstName,
+            string? lastName,
+            DateTime? dateOfBirth,
+            string? phone,
+            Address address,
+            ICustomerUniquenessChecker customerUniquenessChecker)
+        {
+            var newCustomer = new Customer(id, firstName, lastName, dateOfBirth, phone, address);
+            if (await customerUniquenessChecker.isUnique(newCustomer))
+            {
+                throw new BusinessRuleValidationException("Customer with this name already exists");
+            }
+            return newCustomer;
+        }
+
         private readonly List<Order> _orders = new List<Order>();
         public IEnumerable<Order> Orders => _orders.AsReadOnly();
 
@@ -49,7 +67,5 @@ namespace CityInfo.Core.Aggregates
 
             return order;
         }
-
-        //public Customer CreateNew
     }
 }
