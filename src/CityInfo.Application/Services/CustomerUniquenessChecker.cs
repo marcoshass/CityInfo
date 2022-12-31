@@ -15,14 +15,14 @@ namespace CityInfo.Application.Services
             _custRepo = custRepo;
         }
 
-        public async Task<bool> isUnique(Customer customer, CancellationToken cancelToken)
+        public async Task<bool> IsUnique(Customer customer, CancellationToken cancelToken)
         {
             var result = await _custRepo.AnyAsync(
                 new CustomersWithNameSpec(customer),
                 cancelToken
             );
 
-            return result;
+            return !result;
         }
     }
 

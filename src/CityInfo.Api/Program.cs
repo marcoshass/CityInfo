@@ -22,9 +22,14 @@ namespace CityInfo.Api
 
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
-            builder.Services.AddProblemDetails(x => 
+            builder.Services.AddProblemDetails(opts => 
             {
-                x.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+                opts.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+                opts.IncludeExceptionDetails = (ctx, ex) =>
+                {
+                    var env = ctx.RequestServices.GetRequiredService<IHostEnvironment>();
+                    return env.IsDevelopment() || env.IsStaging();
+                };
             });
 
             builder.Services.AddMediatR(typeof(IQuery<>).Assembly);
@@ -40,6 +45,8 @@ namespace CityInfo.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseProblemDetails();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

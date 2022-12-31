@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CityInfo.Core.SharedKernel.Events;
+using CityInfo.Core.SharedKernel.Exceptions;
 
 namespace CityInfo.Core.SharedKernel.DDD
 {
@@ -15,5 +16,21 @@ namespace CityInfo.Core.SharedKernel.DDD
         public TId Id { get; set; }
 
         public List<BaseDomainEvent> Events = new List<BaseDomainEvent>();
+
+        protected static void CheckRule(IBusinessRule rule)
+        {
+            if (rule.IsBroken())
+            {
+                throw new BusinessRuleValidationException(rule);
+            }
+        }
+
+        protected static async Task CheckRuleAsync(IBusinessRuleAsync rule)
+        {
+            if (await rule.IsBroken())
+            {
+                throw new BusinessRuleValidationExceptionAsync(rule);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CityInfo.Core.Services;
+﻿using CityInfo.Core.Rules;
+using CityInfo.Core.Services;
 using CityInfo.Core.SharedKernel.DDD;
 using CityInfo.Core.SharedKernel.Exceptions;
 using CityInfo.Core.ValueObjects;
@@ -48,13 +49,12 @@ namespace CityInfo.Core.Aggregates
             DateTime? dateOfBirth,
             string? phone,
             Address address,
-            ICustomerUniquenessChecker customerUniquenessChecker)
+            ICustomerUniquenessChecker custUniqueChecker)
         {
             var newCustomer = new Customer(id, firstName, lastName, dateOfBirth, phone, address);
-            if (await customerUniquenessChecker.isUnique(newCustomer))
-            {
-                throw new BusinessRuleValidationException("Customer with this name already exists");
-            }
+
+            await CheckRuleAsync(new CustomerNameMustBeUniqueRule(custUniqueChecker, newCustomer));
+
             return newCustomer;
         }
 

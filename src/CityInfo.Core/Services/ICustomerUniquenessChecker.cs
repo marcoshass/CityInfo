@@ -9,6 +9,6 @@ namespace CityInfo.Core.Services
 {
     public interface ICustomerUniquenessChecker
     {
-        Task<bool> isUnique(Customer customer, CancellationToken cancelToken = default(CancellationToken));
+        Task<bool> IsUnique(Customer customer, CancellationToken cancelToken = default(CancellationToken));
     }
 }

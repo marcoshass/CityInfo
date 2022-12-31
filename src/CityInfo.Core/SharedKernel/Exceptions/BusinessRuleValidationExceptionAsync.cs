@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace CityInfo.Core.SharedKernel.Exceptions
 {
-    public class BusinessRuleValidationException : Exception
+    public class BusinessRuleValidationExceptionAsync : Exception
     {
-        public IBusinessRule BrokenRule { get; }
+        public IBusinessRuleAsync BrokenRule { get; }
 
         public string Details { get; }
 
-        public BusinessRuleValidationException(IBusinessRule brokenRule) : base(brokenRule.Message)
+        public BusinessRuleValidationExceptionAsync(IBusinessRuleAsync brokenRule)
+            : base(brokenRule.Message)
         {
             BrokenRule = brokenRule;
-            this.Details = brokenRule.Message;
+            Details = brokenRule.Message;
         }
 
         public override string ToString()
