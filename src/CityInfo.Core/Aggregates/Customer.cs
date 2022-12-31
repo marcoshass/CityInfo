@@ -49,5 +49,7 @@ namespace CityInfo.Core.Aggregates
 
             return order;
         }
+
+        //public Customer CreateNew
     }
 }

@@ -1,12 +1,9 @@
-using CityInfo.Core.SharedKernel.Cqrs.Queries;
-using CityInfo.Core.SharedKernel.DDD;
+using CityInfo.Application.Cqrs.Queries;
+using CityInfo.Core.Data;
 using CityInfo.Core.SharedKernel.Repositories;
-using CityInfo.Infrastructure.Cqrs.Queries.Orders;
 using CityInfo.Infrastructure.Data;
-using CityInfo.Infrastructure.Validation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace CityInfo.Api
 {
@@ -20,9 +17,10 @@ namespace CityInfo.Api
 
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
-            builder.Services.AddMediatR(typeof(EfRepository<>).Assembly);
+            builder.Services.AddMediatR(typeof(IQuery<>).Assembly);
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+            builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

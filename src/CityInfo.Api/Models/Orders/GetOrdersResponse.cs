@@ -1,4 +1,4 @@
-﻿using CityInfo.Infrastructure.Dtos.Orders;
+﻿using CityInfo.Application.Dtos.Orders;
 
 namespace CityInfo.Api.Models.Orders
 {

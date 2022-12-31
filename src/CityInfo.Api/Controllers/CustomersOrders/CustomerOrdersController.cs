@@ -1,8 +1,8 @@
 ﻿using CityInfo.Api.Models.Orders;
+using CityInfo.Application.Cqrs.Queries.Orders;
+using CityInfo.Application.Dtos.Orders;
 using CityInfo.Core.Aggregates;
 using CityInfo.Core.SharedKernel.Repositories;
-using CityInfo.Infrastructure.Cqrs.Queries.Orders;
-using CityInfo.Infrastructure.Dtos.Orders;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CityInfo.Application\CityInfo.Application.csproj" />
     <ProjectReference Include="..\CityInfo.Infrastructure\CityInfo.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using CityInfo.Api.Models.Customers;
-using CityInfo.Infrastructure.Cqrs.Commands;
-using CityInfo.Infrastructure.Dtos.Customers;
+using CityInfo.Application.Cqrs.Commands.Customers;
+using CityInfo.Application.Dtos.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;

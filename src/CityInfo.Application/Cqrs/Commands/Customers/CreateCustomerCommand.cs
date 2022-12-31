@@ -1,15 +1,11 @@
-﻿using Ardalis.Specification;
+﻿using CityInfo.Application.Dtos.Customers;
 using CityInfo.Core.Aggregates;
-using CityInfo.Core.SharedKernel.Cqrs.Commands;
+using CityInfo.Core.Data;
 using CityInfo.Core.SharedKernel.Repositories;
 using CityInfo.Core.ValueObjects;
-using CityInfo.Infrastructure.Data;
-using CityInfo.Infrastructure.Dtos.Customers;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
 using System.Text.Json;
 
-namespace CityInfo.Infrastructure.Cqrs.Commands
+namespace CityInfo.Application.Cqrs.Commands.Customers
 {
     public class CreateCustomerCommand : ICommand<CustomerDto>
     {
@@ -26,16 +22,22 @@ namespace CityInfo.Infrastructure.Cqrs.Commands
 
     public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerCommand, CustomerDto>
     {
-        private readonly AppDbContext _dbContext;
+        private readonly IRepository<Customer> _custRepo;
+        private readonly IRepository<Outbox> _outBoxRepo;
+        private readonly IUnitOfWork _unitOfWork;
 
-
-        public CreateCustomerCommandHandler(AppDbContext dbContext)
+        public CreateCustomerCommandHandler(
+            IRepository<Customer> custRepo,
+            IRepository<Outbox> outBoxRepo,
+            IUnitOfWork unitOfWork)
         {
-            _dbContext = dbContext;
+            _custRepo = custRepo;
+            _outBoxRepo = outBoxRepo;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<CustomerDto> Handle(CreateCustomerCommand command,
-            CancellationToken cancellationToken)
+            CancellationToken cancelToken)
         {
             var newCustomer = new Customer(Guid.NewGuid(),
                     command.FirstName,
@@ -44,7 +46,7 @@ namespace CityInfo.Infrastructure.Cqrs.Commands
                     command.Phone,
                     command.Address);
 
-            await _dbContext.Customers.AddAsync(newCustomer, cancellationToken);
+            await _custRepo.AddAsync(newCustomer, cancelToken);
 
             var newEvent = new Outbox(Guid.NewGuid(),
                 nameof(Customer),
@@ -52,10 +54,10 @@ namespace CityInfo.Infrastructure.Cqrs.Commands
                 "Customer_Added",
                 JsonSerializer.Serialize(newCustomer)
             );
-            
-            await _dbContext.Outboxes.AddAsync(newEvent, cancellationToken);
 
-            await _dbContext.SaveChangesAsync();
+            await _outBoxRepo.AddAsync(newEvent, cancelToken);
+
+            await _unitOfWork.CommitAsync(cancelToken);
 
             return new CustomerDto(newCustomer.Id);
         }

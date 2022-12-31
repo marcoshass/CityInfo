@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Core.SharedKernel.Cqrs.Commands
+namespace CityInfo.Application.Cqrs.Commands
 {
     public interface ICommand : IRequest
     { }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Infrastructure.Dtos.Orders
+namespace CityInfo.Application.Dtos.Orders
 {
     public class OrderDto
     {
