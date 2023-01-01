@@ -7,16 +7,17 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace CityInfo.Api.Controllers.CustomersOrders
+namespace CityInfo.Api.Controllers.Orders
 {
     [Route("api/customers")]
     [ApiController]
-    public class CustomerOrdersController : ControllerBase
+    public class OrdersController : ControllerBase
     {
         private readonly IRepository<Customer> _customerRepo;
         private readonly IMediator _mediator;
 
-        public CustomerOrdersController(IRepository<Customer> customerRepo,
+        public OrdersController(
+            IRepository<Customer> customerRepo,
             IMediator mediator)
         {
             _customerRepo = customerRepo;
@@ -30,47 +31,12 @@ namespace CityInfo.Api.Controllers.CustomersOrders
         /// <returns></returns>
         [Route("{customerId}/orders")]
         [HttpGet]
-        [ProducesResponseType(typeof(GetOrdersResponse), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<OrderDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetOrders(Guid customerId)
         {
             var orders = await _mediator.Send(new GetOrdersQuery(customerId));
 
-            var response = new GetOrdersResponse(orders);
-
-            return Ok(response);
-        }
-
-
-        [Route("{customerId}/orders/{orderId}")]
-        [HttpGet]
-        [ProducesResponseType(typeof(OrderDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetCustomerOrderDetails([FromRoute] int orderId)
-        {
-            // Há 02 opções aqui:
-            // 1 - Criar um query method que utiliza o include ou consulta
-            // a tabela Order diretamente, isso é conceitualmente errado pois
-            // permite consultar Order diretamente sem passar por um Customer
-
-            // 2 - Utilizar o framework specification e permitir o include
-            // das Orders do Customer. Conceitualmente este approach é mais
-            // correto pois permite a query apenas pelo AggregateRoot
-
-            //var order = await _orderRepo.GetByIdAsync(orderId);
-            //if (order == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var response = new OrderDto
-            //{
-            //    Id = order.Id,
-            //    Amount = order.Amount,
-            //    CustomerId = order.CustomerId,
-            //};
-
-            //return Ok(response);
-
-            return Ok();
+            return Ok(orders);
         }
 
         /// <summary>
@@ -115,7 +81,7 @@ namespace CityInfo.Api.Controllers.CustomersOrders
         public async Task<IActionResult> UpdateCustomerOrder(
             [FromRoute] Guid customerId,
             [FromRoute] Guid orderid,
-            [FromBody] UpdateCustomerOrderRequest request,
+            [FromBody] UpdateOrderRequest request,
             CancellationToken cancellationToken = default)
         {
             var customer = await _customerRepo.GetByIdAsync(customerId, cancellationToken);

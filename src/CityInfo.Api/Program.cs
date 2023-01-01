@@ -23,15 +23,17 @@ namespace CityInfo.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
+
             builder.Services.AddMemoryCache();
+
             builder.Services.AddProblemDetails(opts => 
             {
-                opts.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
                 opts.IncludeExceptionDetails = (ctx, ex) =>
                 {
                     var env = ctx.RequestServices.GetRequiredService<IHostEnvironment>();
                     return env.IsDevelopment() || env.IsStaging();
                 };
+                opts.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
             });
 
             var connectionString = builder.Configuration.GetConnectionString("Default");

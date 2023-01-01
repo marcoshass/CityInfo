@@ -2,7 +2,7 @@
 
 namespace CityInfo.Api.Models.Orders
 {
-    public class UpdateCustomerOrderRequest
+    public class UpdateOrderRequest
     {
         [Required]
         public decimal Amount { get; set; }

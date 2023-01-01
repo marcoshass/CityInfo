@@ -17,19 +17,19 @@ namespace CityInfo.Core.SharedKernel.DDD
 
         public List<BaseDomainEvent> Events = new List<BaseDomainEvent>();
 
-        protected static void CheckRule(IBusinessRule rule)
+        protected static async Task CheckRuleAsync(IBusinessRuleAsync rule)
         {
-            if (rule.IsBroken())
+            if (await rule.IsBroken())
             {
                 throw new BusinessRuleValidationException(rule);
             }
         }
 
-        protected static async Task CheckRuleAsync(IBusinessRuleAsync rule)
+        protected static void CheckRule(IBusinessRule rule)
         {
-            if (await rule.IsBroken())
+            if (rule.IsBroken())
             {
-                throw new BusinessRuleValidationExceptionAsync(rule);
+                throw new BusinessRuleValidationException(rule);
             }
         }
     }

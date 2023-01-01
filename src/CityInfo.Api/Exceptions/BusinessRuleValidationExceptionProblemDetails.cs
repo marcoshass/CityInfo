@@ -1,8 +1,10 @@
 ﻿using CityInfo.Core.SharedKernel.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace CityInfo.Api.Exceptions
 {
-    public class BusinessRuleValidationExceptionProblemDetails : Microsoft.AspNetCore.Mvc.ProblemDetails
+    public class BusinessRuleValidationExceptionProblemDetails : ProblemDetails
     {
         public BusinessRuleValidationExceptionProblemDetails(BusinessRuleValidationException exception)
         {

@@ -1,8 +1,13 @@
-----------
-How to validate aggregate roots
-with complex business logic
-----------
+################################
+Validate aggregate roots with complex business logic
+################################
 http://www.kamilgrzybek.com/design/domain-model-validation/
+
+################################
+ProblemDetails Middleware
+################################
+https://code-maze.com/using-the-problemdetails-class-in-asp-net-core-web-api/
+
 
 
 How to position files into each project inside of a clean architecture

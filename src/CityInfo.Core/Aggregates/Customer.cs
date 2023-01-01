@@ -1,13 +1,7 @@
 ﻿using CityInfo.Core.Rules;
 using CityInfo.Core.Services;
 using CityInfo.Core.SharedKernel.DDD;
-using CityInfo.Core.SharedKernel.Exceptions;
 using CityInfo.Core.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CityInfo.Core.Aggregates
 {
