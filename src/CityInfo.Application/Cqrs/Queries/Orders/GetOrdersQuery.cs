@@ -14,37 +14,4 @@ namespace CityInfo.Application.Cqrs.Queries.Orders
             CustomerId = customerId;
         }
     }
-
-    public class GetOrdersQueryHandler : IQueryHandler<GetOrdersQuery, IEnumerable<OrderDto>>
-    {
-        private readonly IRepository<Customer> _custRepo;
-
-        public GetOrdersQueryHandler(IRepository<Customer> custRepo)
-        {
-            _custRepo = custRepo;
-        }
-
-        public async Task<IEnumerable<OrderDto>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
-        {
-            var customer = await _custRepo.FirstOrDefaultAsync(new CustomerByIdWithOrdersSpec(request.CustomerId), cancellationToken);
-            var orders = customer?.Orders ?? Enumerable.Empty<Order>();
-
-            return orders.Select(x => new OrderDto
-            {
-                Id = x.Id,
-                Amount = x.Amount,
-                CustomerId = x.CustomerId
-            });
-        }
-    }
-
-    public class CustomerByIdWithOrdersSpec : Specification<Customer>
-    {
-        public CustomerByIdWithOrdersSpec(Guid customerId)
-        {
-            Query
-                .Where(x => x.Id == customerId)
-                .Include(x => x.Orders);
-        }
-    }
 }

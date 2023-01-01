@@ -19,8 +19,8 @@ namespace CityInfo.Application.Services
         {
             var connection = _sqlConnectionFactory.GetOpenConnection();
 
-            const string sql =
-                "SELECT 1 							    "
+            const string sql = ""
+                + " SELECT 1 							"
                 + " FROM								"
                 + " 	Customers						"
                 + " WHERE							    "
