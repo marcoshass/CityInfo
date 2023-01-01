@@ -1,6 +1,6 @@
 using CityInfo.Api.Exceptions;
 using CityInfo.Application.Configuration.Data;
-using CityInfo.Application.Cqrs.Queries;
+using CityInfo.Application.Cqrs;
 using CityInfo.Application.Services;
 using CityInfo.Core.Data;
 using CityInfo.Core.Services;

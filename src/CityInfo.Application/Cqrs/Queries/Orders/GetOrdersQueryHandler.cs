@@ -18,10 +18,8 @@ namespace CityInfo.Application.Cqrs.Queries.Orders
             const string sql = ""
                 + " SELECT *                     "
                 + " FROM                         "
-                + "                              "
                 + "     Orders                   "
                 + " WHERE                        "
-                + "                              "
                 + "     CustomerId = @CustomerId ";
 
             var connection = _sqlConnectionFactory.GetOpenConnection();

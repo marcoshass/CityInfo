@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityInfo.Application.Cqrs.Queries
+namespace CityInfo.Application.Cqrs
 {
     public interface IQueryHandler<in TQuery, TResult> :
         IRequestHandler<TQuery, TResult> where TQuery : IQuery<TResult>
