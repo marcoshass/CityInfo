@@ -1,10 +1,12 @@
 using CityInfo.Api.Exceptions;
+using CityInfo.Application.Configuration.Data;
 using CityInfo.Application.Cqrs.Queries;
 using CityInfo.Application.Services;
 using CityInfo.Core.Data;
 using CityInfo.Core.Services;
 using CityInfo.Core.SharedKernel.Exceptions;
 using CityInfo.Core.SharedKernel.Repositories;
+using CityInfo.Infrastructure.Configuration.Data;
 using CityInfo.Infrastructure.Data;
 using Hellang.Middleware.ProblemDetails;
 using MediatR;
@@ -32,8 +34,11 @@ namespace CityInfo.Api
                 };
             });
 
+            var connectionString = builder.Configuration.GetConnectionString("Default");
+
             builder.Services.AddMediatR(typeof(IQuery<>).Assembly);
-            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+            builder.Services.AddScoped<ISqlConnectionFactory>(x => new SqlConnectionFactory(connectionString));
+            builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
             builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
             builder.Services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 

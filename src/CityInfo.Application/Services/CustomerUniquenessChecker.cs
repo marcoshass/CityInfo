@@ -1,40 +1,36 @@
 ﻿using Ardalis.Specification;
+using CityInfo.Application.Configuration.Data;
 using CityInfo.Core.Aggregates;
 using CityInfo.Core.Services;
-using CityInfo.Core.SharedKernel.Repositories;
+using Dapper;
 
 namespace CityInfo.Application.Services
 {
     public class CustomerUniquenessChecker : ICustomerUniquenessChecker
     {
-        private readonly IRepository<Customer> _custRepo;
+        private readonly ISqlConnectionFactory _sqlConnectionFactory;
 
-        public CustomerUniquenessChecker(
-            IRepository<Customer> custRepo)
+        public CustomerUniquenessChecker(ISqlConnectionFactory sqlConnectionFactory)
         {
-            _custRepo = custRepo;
+            _sqlConnectionFactory = sqlConnectionFactory;
         }
 
         public async Task<bool> IsUnique(Customer customer, CancellationToken cancelToken)
         {
-            var result = await _custRepo.AnyAsync(
-                new CustomersWithNameSpec(customer),
-                cancelToken
-            );
+            var connection = _sqlConnectionFactory.GetOpenConnection();
 
-            return !result;
-        }
-    }
+            const string sql =
+                "SELECT 1 							    "
+                + " FROM								"
+                + " 	Customers						"
+                + " WHERE							    "
+                + " 	1=1								"
+                + " 	AND FirstName = @FirstName		"
+                + " 	AND LastName = @LastName        ";
 
-    public class CustomersWithNameSpec : Specification<Customer>
-    {
-        public CustomersWithNameSpec(Customer customer)
-        {
-            Query
-                .Where(
-                    x => x.FirstName == customer.FirstName && 
-                    x.LastName == customer.LastName
-                );
+            var result = await connection.QueryFirstOrDefaultAsync(sql, new { customer.FirstName, customer.LastName });
+
+            return result == null;
         }
     }
 }

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CityInfo.Application\CityInfo.Application.csproj" />
     <ProjectReference Include="..\CityInfo.Core\CityInfo.Core.csproj" />
   </ItemGroup>
 
