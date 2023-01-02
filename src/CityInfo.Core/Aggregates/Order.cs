@@ -20,5 +20,10 @@ namespace CityInfo.Core.Aggregates
             Amount = amount;
             CustomerId = customerId;
         }
+
+        public void UpdateAmount(decimal amount)
+        {
+            Amount = amount;
+        }
     }
 }

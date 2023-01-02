@@ -33,7 +33,7 @@ namespace CityInfo.Api
                     var env = ctx.RequestServices.GetRequiredService<IHostEnvironment>();
                     return env.IsDevelopment() || env.IsStaging();
                 };
-                opts.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionProblemDetails(ex));
+                opts.Map<BusinessRuleValidationException>(ex => new BusinessRuleValidationExceptionDetails(ex));
             });
 
             var connectionString = builder.Configuration.GetConnectionString("Default");

@@ -4,9 +4,9 @@ using System;
 
 namespace CityInfo.Api.Exceptions
 {
-    public class BusinessRuleValidationExceptionProblemDetails : ProblemDetails
+    public class BusinessRuleValidationExceptionDetails : ProblemDetails
     {
-        public BusinessRuleValidationExceptionProblemDetails(BusinessRuleValidationException exception)
+        public BusinessRuleValidationExceptionDetails(BusinessRuleValidationException exception)
         {
             Title = "Business rule validation error";
             Status = StatusCodes.Status409Conflict;

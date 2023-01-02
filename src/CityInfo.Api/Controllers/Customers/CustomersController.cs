@@ -19,7 +19,7 @@ namespace CityInfo.Api.Controllers.Customers
         }
 
         /// <summary>
-        /// Register customer.
+        /// Create customer.
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>

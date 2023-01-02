@@ -2,7 +2,9 @@
 using CityInfo.Application.Cqrs.Queries.Orders;
 using CityInfo.Application.Dtos.Orders;
 using CityInfo.Core.Aggregates;
+using CityInfo.Core.Data;
 using CityInfo.Core.SharedKernel.Repositories;
+using CityInfo.Core.Specifications.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
@@ -14,18 +16,21 @@ namespace CityInfo.Api.Controllers.Orders
     public class OrdersController : ControllerBase
     {
         private readonly IRepository<Customer> _customerRepo;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMediator _mediator;
 
         public OrdersController(
             IRepository<Customer> customerRepo,
+            IUnitOfWork unitOfWork,
             IMediator mediator)
         {
             _customerRepo = customerRepo;
+            _unitOfWork = unitOfWork;
             _mediator = mediator;
         }
 
         /// <summary>
-        /// Get Customer orders.
+        /// Get customer orders.
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
@@ -40,11 +45,11 @@ namespace CityInfo.Api.Controllers.Orders
         }
 
         /// <summary>
-        /// Add customer order.
+        /// Add order to customer.
         /// </summary>
         /// <param name="customerId"></param>
         /// <param name="request"></param>
-        /// <param name="cancellationToken"></param>
+        /// <param name="cancelToken"></param>
         /// <returns></returns>
         [Route("{customerId}/orders")]
         [HttpPost]
@@ -52,9 +57,9 @@ namespace CityInfo.Api.Controllers.Orders
         public async Task<IActionResult> AddCustomerOrder(
             Guid customerId,
             CreateOrderRequest request,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancelToken = default)
         {
-            var customer = await _customerRepo.GetByIdAsync(customerId, cancellationToken);
+            var customer = await _customerRepo.GetByIdAsync(customerId, cancelToken);
             if (customer == null)
             {
                 return NotFound();
@@ -62,7 +67,8 @@ namespace CityInfo.Api.Controllers.Orders
 
             var newOrder = new Order(request.Amount, customerId);
             customer.AddOrder(newOrder);
-            await _customerRepo.UpdateAsync(customer, cancellationToken);
+            
+            await _unitOfWork.CommitAsync(cancelToken);
 
             var response = new OrderDto(newOrder.Id);
             return Created(string.Empty, response);
@@ -80,15 +86,27 @@ namespace CityInfo.Api.Controllers.Orders
         [ProducesResponseType(typeof(OrderDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateCustomerOrder(
             [FromRoute] Guid customerId,
-            [FromRoute] Guid orderid,
+            [FromRoute] int orderid,
             [FromBody] UpdateOrderRequest request,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancelToken = default)
         {
-            var customer = await _customerRepo.GetByIdAsync(customerId, cancellationToken);
+            var customer = await _customerRepo.FirstOrDefaultAsync(
+                new GetCustomerWithOrdersSpec(customerId), cancelToken
+            );
             if (customer == null)
             {
                 return NotFound();
             }
+
+            var order = customer.Orders.Where(x => x.Id == orderid).FirstOrDefault();
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            order.UpdateAmount(request.Amount);
+
+            await _unitOfWork.CommitAsync(cancelToken);
 
             return Ok();
         }
