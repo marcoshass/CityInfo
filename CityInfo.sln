@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32630.192
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Core", "src\CityInfo.Core\CityInfo.Core.csproj", "{A0FD87CD-4561-491F-921C-87F73ADFED86}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Api", "src\CityInfo.Api\CityInfo.Api.csproj", "{6064025D-D310-4AB5-92F5-4483ADDCED6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Application", "src\CityInfo.Application\CityInfo.Application.csproj", "{A4F863DF-FCF5-4B41-A066-106A26240752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CityInfo.Application", "src\CityInfo.Application\CityInfo.Application.csproj", "{A4F863DF-FCF5-4B41-A066-106A26240752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityInfo.Mvc", "src\CityInfo.Mvc\CityInfo.Mvc.csproj", "{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{A4F863DF-FCF5-4B41-A066-106A26240752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4F863DF-FCF5-4B41-A066-106A26240752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4F863DF-FCF5-4B41-A066-106A26240752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{A7E5FC91-E237-46D3-A6AA-02A5DCE4861A} = {074A6CC5-6541-4792-AE38-C8735360E36B}
 		{6064025D-D310-4AB5-92F5-4483ADDCED6C} = {074A6CC5-6541-4792-AE38-C8735360E36B}
 		{A4F863DF-FCF5-4B41-A066-106A26240752} = {074A6CC5-6541-4792-AE38-C8735360E36B}
+		{1983BCF8-A4EA-42B8-8EFA-F5F3D8385B52} = {074A6CC5-6541-4792-AE38-C8735360E36B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2929A6FE-E76B-4464-AC5A-56C04A836767}

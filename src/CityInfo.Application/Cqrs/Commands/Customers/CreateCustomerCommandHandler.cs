@@ -3,6 +3,7 @@ using CityInfo.Core.Aggregates;
 using CityInfo.Core.Data;
 using CityInfo.Core.Services;
 using CityInfo.Core.SharedKernel.Repositories;
+using System.Text;
 using System.Text.Json;
 
 namespace CityInfo.Application.Cqrs.Commands.Customers
@@ -29,6 +30,8 @@ namespace CityInfo.Application.Cqrs.Commands.Customers
         public async Task<CustomerDto> Handle(CreateCustomerCommand command,
             CancellationToken cancelToken)
         {
+            Validate(command);
+
             var newCustomer = await Customer.Create(Guid.NewGuid(),
                     command.FirstName,
                     command.LastName,
@@ -52,5 +55,35 @@ namespace CityInfo.Application.Cqrs.Commands.Customers
 
             return new CustomerDto(newCustomer.Id);
         }
+
+        private static void Validate(CreateCustomerCommand command)
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(command.FirstName))
+            {
+                errors.Add("FirstName is empty");
+            }
+
+            if (command.Address == null)
+            {
+                errors.Add("Address is empty");
+            }
+
+            if (errors.Any())
+            {
+                var errorBuilder = new StringBuilder();
+
+                errorBuilder.AppendLine("Invalid customer, reason: ");
+
+                foreach (var error in errors)
+                {
+                    errorBuilder.AppendLine(error);
+                }
+
+                throw new Exception(errorBuilder.ToString());
+            }
+        }
+
     }
 }

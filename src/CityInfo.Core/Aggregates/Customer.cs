@@ -61,5 +61,15 @@ namespace CityInfo.Core.Aggregates
 
             return order;
         }
+
+        public Order RemoveOrder(int orderId)
+        {
+            var orderToRemove = _orders.Where(x => x.Id == orderId).FirstOrDefault();
+            if (orderToRemove != null)
+            {
+                _orders.Remove(orderToRemove);
+            }
+            return orderToRemove;
+        }
     }
 }

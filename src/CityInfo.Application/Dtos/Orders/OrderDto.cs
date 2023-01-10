@@ -17,9 +17,11 @@ namespace CityInfo.Application.Dtos.Orders
 
         }
 
-        public OrderDto(int id)
+        public OrderDto(int id, decimal amount, Guid customerId)
         {
             Id = id;
+            Amount = amount;
+            CustomerId = customerId;
         }
     }
 }

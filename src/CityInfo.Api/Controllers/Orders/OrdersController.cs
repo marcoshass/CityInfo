@@ -70,7 +70,7 @@ namespace CityInfo.Api.Controllers.Orders
             
             await _unitOfWork.CommitAsync(cancelToken);
 
-            var response = new OrderDto(newOrder.Id);
+            var response = new OrderDto(newOrder.Id, request.Amount, customerId);
             return Created(string.Empty, response);
         }
 
@@ -105,6 +105,34 @@ namespace CityInfo.Api.Controllers.Orders
             }
 
             order.UpdateAmount(request.Amount);
+
+            await _unitOfWork.CommitAsync(cancelToken);
+
+            return Ok();
+        }
+
+        [Route("{customerId}/orders/{orderId}")]
+        [HttpDelete]
+        [ProducesResponseType(typeof(List<OrderDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteOrder(
+            [FromRoute] Guid customerId,
+            [FromRoute] int orderId,
+            CancellationToken cancelToken = default)
+        {
+            var customer = await _customerRepo.FirstOrDefaultAsync(
+                new GetCustomerWithOrdersSpec(customerId), cancelToken
+            );
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var removedOrder = customer.RemoveOrder(orderId);
+            if (removedOrder == null)
+            {
+                return NotFound();
+            }
 
             await _unitOfWork.CommitAsync(cancelToken);
 
